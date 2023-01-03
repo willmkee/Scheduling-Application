@@ -23,26 +23,26 @@
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
          <children>
-            <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0">
+            <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-radius: 10;">
                <children>
-                  <Label alignment="CENTER" prefHeight="122.0" prefWidth="154.0" text="Scheduling Log-in">
+                  <Label fx:id="loginTitle" alignment="CENTER" prefHeight="122.0" prefWidth="154.0" text="Scheduling Log-in">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER" prefHeight="38.0" prefWidth="401.0" spacing="20.0">
                      <children>
-                        <Label text="Username">
+                        <Label fx:id="loginUsernameLable" text="Username">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="loginUsernameTextField" promptText="Enter username" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="37.0" prefWidth="401.0" spacing="20.0">
                      <children>
-                        <Label text="Password">
+                        <Label fx:id="loginPasswordLable" text="Password">
                            <HBox.margin>
                               <Insets right="4.0" />
                            </HBox.margin>
@@ -50,17 +50,17 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField />
+                        <TextField fx:id="loginPasswordTextField" promptText="Enter password" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Label text="Location">
+                        <Label fx:id="loginLocationLabel" text="Location">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField alignment="TOP_LEFT" editable="false" />
+                        <TextField fx:id="loginLocationTextField" alignment="TOP_LEFT" editable="false" />
                      </children>
                      <padding>
                         <Insets right="20.0" />
@@ -68,8 +68,8 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Log-In" />
-                        <Button minWidth="-Infinity" mnemonicParsing="false" prefWidth="51.0" text="Exit" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" text="Log-In" />
+                        <Button fx:id="loginExitButton" minWidth="-Infinity" mnemonicParsing="false" prefWidth="51.0" text="Exit" />
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
@@ -81,6 +81,9 @@
                </children>
             </VBox>
          </children>
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
       </AnchorPane>
    </children>
 </GridPane>
