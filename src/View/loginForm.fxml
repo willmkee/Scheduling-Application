@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="Controller.loginFormController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.loginFormController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -68,8 +67,8 @@
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button fx:id="loginButton" mnemonicParsing="false" text="Log-In" />
-                        <Button fx:id="loginExitButton" minWidth="-Infinity" mnemonicParsing="false" prefWidth="51.0" text="Exit" />
+                        <Button fx:id="loginButton" mnemonicParsing="false" onAction="#onLogin" text="Log-In" />
+                        <Button fx:id="loginExitButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExit" prefWidth="51.0" text="Exit" />
                      </children>
                      <VBox.margin>
                         <Insets top="20.0" />
