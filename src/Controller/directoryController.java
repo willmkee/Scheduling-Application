@@ -2,6 +2,7 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class directoryController {
     public Button viewUpdateCustomerButton;
@@ -10,6 +11,7 @@ public class directoryController {
     public Button addAppointmentButton;
     public Button viewReportsButton;
     public Button exitButton;
+    public Label directoryLabel;
 
     public void onViewUpdate(ActionEvent actionEvent) {
     }
