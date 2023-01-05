@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.directoryController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="320.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.directoryController">
+   <children>
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="300.0" prefWidth="300.0" spacing="10.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-radius: 10;">
+         <children>
+            <Label fx:id="directoryLabel" text="What would you like to do?">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="viewUpdateCustomerButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onViewUpdate" prefWidth="200.0" text="View or Update Customers" />
+            <Button fx:id="addCustomerButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddCustomer" prefWidth="200.0" text="Add New Customer" />
+            <Button fx:id="viewUpdateAppointmentsButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onViewUpdateAppointments" prefWidth="200.0" text="View or Update Appointments" />
+            <Button fx:id="addAppointmentButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddAppointment" prefWidth="200.0" text="Add New Appointment" />
+            <Button fx:id="viewReportsButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onViewReports" prefWidth="200.0" text="View Reports" />
+            <Button fx:id="exitButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExit" prefWidth="200.0" text="Exit" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
