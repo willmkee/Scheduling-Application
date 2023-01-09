@@ -60,7 +60,7 @@
                         <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="490.0">
                            <children>
                               <Label fx:id="appointmentIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment ID" />
-                              <TextField fx:id="appointmentIdTextField" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
+                              <TextField fx:id="appointmentIdTextField" editable="false" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>
@@ -107,6 +107,16 @@
                               </ComboBox>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="customerIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Customer ID" />
+                              <TextField fx:id="customerIdTextField" minWidth="-Infinity" prefWidth="300.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                   <VBox minWidth="-Infinity" prefHeight="93.0" prefWidth="460.0">
@@ -147,10 +157,20 @@
                               </DatePicker>
                            </children>
                         </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label fx:id="endTimeLabel" prefWidth="160.0" text="End Time" />
-                              <ComboBox fx:id="endTimeComboBox" minWidth="-Infinity" prefWidth="174.0" />
+                              <ComboBox fx:id="endTimeComboBox" minWidth="-Infinity" prefWidth="174.0">
+                                 <HBox.margin>
+                                    <Insets right="126.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="userIdLabel" minWidth="-Infinity" prefWidth="160.0" text="User ID" />
+                              <TextField fx:id="userIdTextField" minWidth="-Infinity" prefWidth="300.0" />
                            </children>
                         </HBox>
                      </children>

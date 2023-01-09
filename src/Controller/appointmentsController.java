@@ -44,6 +44,10 @@ public class appointmentsController {
     public Button deleteAppointmentButton;
     public Button addAppointmentButton;
     public Button mainMenuButton;
+    public Label customerIdLabel;
+    public TextField customerIdTextField;
+    public Label userIdLabel;
+    public TextField userIdTextField;
 
     public void onAllAppointments(ActionEvent actionEvent) {
     }
