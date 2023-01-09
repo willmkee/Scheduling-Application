@@ -29,9 +29,11 @@ public class loginFormController {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(directory);
         stage.setScene(scene);
-        stage.show(); */
+        stage.show();*/
     }
 
     public void onExit(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 }
