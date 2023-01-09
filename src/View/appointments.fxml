@@ -55,11 +55,11 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="543.0">
                <children>
-                  <VBox minWidth="-Infinity" prefHeight="93.0" prefWidth="490.0">
+                  <VBox minWidth="-Infinity" prefHeight="93.0" prefWidth="490.0" spacing="10.0">
                      <children>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="85.0">
+                        <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="490.0">
                            <children>
-                              <Label fx:id="appointmentIdLabel" text="Appointment ID" />
+                              <Label fx:id="appointmentIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment ID" />
                               <TextField fx:id="appointmentIdTextField" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
@@ -67,9 +67,9 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="75.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="appointmentTitleLabel" text="Appointment Title" />
+                              <Label fx:id="appointmentTitleLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment Title" />
                               <TextField fx:id="appointmentTitleTextField" minWidth="-Infinity" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
@@ -77,9 +77,9 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="37.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="appointmentDescriptionLabel" text="Appointment Description" />
+                              <Label fx:id="appointmentDescriptionLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment Description" />
                               <TextField fx:id="appointmentDescriptionTextField" minWidth="-Infinity" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
@@ -87,9 +87,9 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="52.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="appointmentLocationLabel" text="Appointment Location" />
+                              <Label fx:id="appointmentLocationLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment Location" />
                               <TextField fx:id="appointmentLocationTextField" minWidth="-Infinity" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
@@ -97,9 +97,9 @@
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="129.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="contactLabel" text="Contact" />
+                              <Label fx:id="contactLabel" minWidth="-Infinity" prefWidth="170.0" text="Contact" />
                               <ComboBox fx:id="contactComboBox" minWidth="-Infinity" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
@@ -111,34 +111,46 @@
                   </VBox>
                   <VBox minWidth="-Infinity" prefHeight="93.0" prefWidth="460.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label text="Label" />
-                              <TextField />
+                              <Label fx:id="typeLabel" minWidth="-Infinity" prefWidth="160.0" text="Type" />
+                              <TextField fx:id="typeTextField" prefWidth="300.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="startDateLabel" minWidth="-Infinity" prefWidth="160.0" text="Start Date" />
+                              <DatePicker fx:id="startDateDatePicker" minWidth="-Infinity" prefWidth="174.0">
+                                 <HBox.margin>
+                                    <Insets right="126.0" />
+                                 </HBox.margin>
+                              </DatePicker>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="startTimeLabel" minWidth="-Infinity" prefWidth="160.0" text="Start Time" />
+                              <ComboBox fx:id="startTimeComboBox" minWidth="-Infinity" prefWidth="174.0">
+                                 <HBox.margin>
+                                    <Insets right="126.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="endDateLabel" minWidth="-Infinity" prefWidth="160.0" text="End Date" />
+                              <DatePicker fx:id="endDateDatePicker" minWidth="-Infinity" prefWidth="174.0">
+                                 <HBox.margin>
+                                    <Insets right="126.0" />
+                                 </HBox.margin>
+                              </DatePicker>
                            </children>
                         </HBox>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label text="Label" />
-                              <DatePicker />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Label" />
-                              <ComboBox prefWidth="150.0" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Label" />
-                              <DatePicker />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
-                           <children>
-                              <Label text="Label" />
-                              <ComboBox prefWidth="150.0" />
+                              <Label fx:id="endTimeLabel" prefWidth="160.0" text="End Time" />
+                              <ComboBox fx:id="endTimeComboBox" minWidth="-Infinity" prefWidth="174.0" />
                            </children>
                         </HBox>
                      </children>
@@ -147,10 +159,18 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
-                  <Button mnemonicParsing="false" text="Button" />
+                  <HBox alignment="CENTER" minWidth="-Infinity" prefHeight="100.0" prefWidth="479.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="updateAppointmentButton" mnemonicParsing="false" onAction="#onUpdateAppointment" text="Update Selected Appointment" />
+                        <Button fx:id="deleteAppointmentButton" mnemonicParsing="false" onAction="#onDeleteAppointment" text="Delete Selected Appointment" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="479.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="addAppointmentButton" mnemonicParsing="false" onAction="#onAddAppointment" text="Add New Appointment" />
+                        <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#onMainMenu" text="Main Menu" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>
