@@ -1,10 +1,18 @@
 package Controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class addCustomerController {
     public Label addCustomerLabel;
@@ -28,6 +36,11 @@ public class addCustomerController {
     public void onAddSaveChanges(ActionEvent actionEvent) {
     }
 
-    public void onCancel(ActionEvent actionEvent) {
+    public void onCancel(ActionEvent actionEvent) throws IOException {
+        Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(directory);
+        stage.setScene(scene);
+        stage.show();
     }
 }

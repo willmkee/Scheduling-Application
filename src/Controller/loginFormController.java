@@ -25,11 +25,11 @@ public class loginFormController {
     public Button loginExitButton;
 
     public void onLogin(ActionEvent actionEvent) throws IOException {
-        /*Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
+        Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(directory);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
     }
 
     public void onExit(ActionEvent actionEvent) {

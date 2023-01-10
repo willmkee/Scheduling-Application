@@ -1,7 +1,15 @@
 package Controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class addAppointmentController {
     public Label addAppointmentLabel;
@@ -35,6 +43,11 @@ public class addAppointmentController {
     public void onSaveAppointment(ActionEvent actionEvent) {
     }
 
-    public void onCancel(ActionEvent actionEvent) {
+    public void onCancel(ActionEvent actionEvent) throws IOException {
+        Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(directory);
+        stage.setScene(scene);
+        stage.show();
     }
 }
