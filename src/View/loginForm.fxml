@@ -24,7 +24,7 @@
          <children>
             <VBox alignment="TOP_CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-radius: 10;">
                <children>
-                  <Label fx:id="loginTitle" alignment="CENTER" prefHeight="122.0" prefWidth="154.0" text="Scheduling Log-in">
+                  <Label fx:id="loginTitle" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" prefHeight="122.0" prefWidth="400.0" text="Scheduling Log-in">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -36,7 +36,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="loginUsernameTextField" promptText="Enter username" />
+                        <TextField fx:id="loginUsernameTextField" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="37.0" prefWidth="401.0" spacing="20.0">
@@ -49,17 +49,16 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="loginPasswordTextField" promptText="Enter password" />
+                        <TextField fx:id="loginPasswordTextField" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Label fx:id="loginLocationLabel" text="Location">
+                        <Label fx:id="loginLocationLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" minWidth="-Infinity" prefWidth="400.0" text="Location">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="loginLocationTextField" alignment="TOP_LEFT" editable="false" />
                      </children>
                      <padding>
                         <Insets right="20.0" />

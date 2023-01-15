@@ -24,10 +24,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        ResourceBundle rb = ResourceBundle.getBundle("language/lang", Locale.getDefault());
-        if(Locale.getDefault().getLanguage().equals("fr")) {
-            System.out.println(rb.getString("Password"));
-        }
+
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();
