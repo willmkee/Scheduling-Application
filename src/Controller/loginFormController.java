@@ -53,6 +53,14 @@ public class loginFormController implements Initializable {
             loginButton.setText(rb.getString("login"));
             loginExitButton.setText(rb.getString("exit"));
         }
+        else {
+            rb = ResourceBundle.getBundle("language/lang", Locale.forLanguageTag("en"));
+            loginUsernameLable.setText(rb.getString("Username"));
+            loginPasswordLable.setText(rb.getString("Password"));
+            loginTitle.setText(rb.getString("schedulingLogin"));
+            loginButton.setText(rb.getString("login"));
+            loginExitButton.setText(rb.getString("exit"));
+        }
 
     }
 }
