@@ -25,7 +25,6 @@ public class loginFormController implements Initializable {
     public Label loginPasswordLable;
     public TextField loginPasswordTextField;
     public Label loginLocationLabel;
-    public TextField loginLocationTextField;
     public Button loginButton;
     public Button loginExitButton;
 
