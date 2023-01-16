@@ -1,17 +1,24 @@
 package Controller;
 
+import DAO.appointmentsQuery;
+import Model.appointments;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class appointmentsController {
+public class appointmentsController implements Initializable {
     public Label appointmentsLabel;
     public TableView appointmentsTableView;
     public TableColumn appointmentTableCol;
@@ -56,6 +63,8 @@ public class appointmentsController {
     public TextField customerIdTextField;
     public Label userIdLabel;
     public TextField userIdTextField;
+    private int selectedIndex;
+    private appointments selectedAppointment;
 
     public void onAllAppointments(ActionEvent actionEvent) {
     }
@@ -81,5 +90,32 @@ public class appointmentsController {
         Scene scene = new Scene(directory);
         stage.setScene(scene);
         stage.show();
+    }
+
+    /*public void populateAppointment(int selectedIndex, appointments selectedAppointment) {
+        this.selectedIndex = selectedIndex;
+        this.selectedAppointment = selectedAppointment;
+        appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
+    }*/
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+            appointmentTableCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+            titleTableCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            descriptionTableCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+            locationTableCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+            contactTableCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+            typeTableCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            startDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+            endDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+            customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+            userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 }

@@ -16,12 +16,8 @@ public abstract class userQuery {
             ps.setString(1, password);
             ps.setString(2, userName);
             ResultSet results = ps.executeQuery();
-            results.next();
-            if (results.getString("User_Name").equals(userName)) {
-                if (results.getString("Password").equals(password)) {
+            if (results.next()) {
                     return results.getInt("User_ID");
-
-                }
             }
         }
         catch (SQLException exception){
