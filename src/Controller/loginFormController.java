@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,10 +14,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static DAO.userQuery.passwordVerification;
 
 public class loginFormController implements Initializable {
     public Label loginTitle;
@@ -28,12 +32,27 @@ public class loginFormController implements Initializable {
     public Button loginButton;
     public Button loginExitButton;
 
-    public void onLogin(ActionEvent actionEvent) throws IOException {
-        Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(directory);
-        stage.setScene(scene);
-        stage.show();
+    public void onLogin(ActionEvent actionEvent) throws IOException, SQLException {
+        String userName = loginUsernameTextField.getText();
+        String password = loginPasswordTextField.getText();
+        int validUser = passwordVerification(userName, password);
+
+        ResourceBundle rb = ResourceBundle.getBundle("language/lang", Locale.getDefault());
+        if (validUser != -1) {
+            Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(directory);
+            stage.setScene(scene);
+            stage.show();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(rb.getString("error"));
+            alert.setHeaderText(rb.getString("error"));
+            alert.setContentText(rb.getString("invalid"));
+
+            alert.showAndWait();
+        }
     }
 
     public void onExit(ActionEvent actionEvent) {
