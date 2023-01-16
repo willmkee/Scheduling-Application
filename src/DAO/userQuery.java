@@ -11,8 +11,10 @@ public abstract class userQuery {
     public static int passwordVerification (String userName, String password) throws SQLException {
         try {
             String sql = "SELECT * FROM client_schedule.users\n" +
-                    "WHERE Password = \"" + password + "\" AND User_Name = \"" + userName + "\";";
+                    "WHERE Password = ? AND User_Name = ?;";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, userName);
             ResultSet results = ps.executeQuery();
             results.next();
             if (results.getString("User_Name").equals(userName)) {
