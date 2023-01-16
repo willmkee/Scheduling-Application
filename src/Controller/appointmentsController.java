@@ -114,6 +114,7 @@ public class appointmentsController implements Initializable {
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
 
+
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
