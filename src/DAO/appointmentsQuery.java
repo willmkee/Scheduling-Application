@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class appointmentsQuery {
     public static ObservableList<appointments> getAllAppointments() throws SQLException {
         ObservableList<appointments> allAppointments = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM client_schedule.appointments";
+        String sql = "SELECT * FROM client_schedule.appointments;";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while(rs.next()) {
