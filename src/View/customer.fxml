@@ -12,10 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.customerController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.customerController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="620.0" spacing="10.0" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-radius: 10;">
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="680.0" spacing="10.0" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <Label fx:id="updateCustomersLabel" alignment="CENTER" contentDisplay="TOP" text="Update Customers">
                <font>
@@ -26,10 +25,11 @@
               <columns>
                 <TableColumn fx:id="customerIdTableCol" prefWidth="35.0" text="ID" />
                 <TableColumn fx:id="customerNameTableCol" prefWidth="115.0" text="Customer Name" />
-                  <TableColumn fx:id="customerAddressTableCol" prefWidth="186.0" text="Address" />
-                  <TableColumn fx:id="customerPostalCodeTableCol" minWidth="0.0" prefWidth="74.0" text="Postal Code" />
-                  <TableColumn fx:id="customerPhoneTableCol" prefWidth="95.0" text="Phone Number" />
-                  <TableColumn fx:id="customerFirstLevelDataTableCol" prefWidth="94.0" text="State/Province" />
+                  <TableColumn fx:id="customerAddressTableCol" prefWidth="108.0" text="Address" />
+                  <TableColumn fx:id="customerPostalCodeTableCol" minWidth="0.0" prefWidth="98.0" text="Postal Code" />
+                  <TableColumn fx:id="customerPhoneTableCol" prefWidth="117.0" text="Phone Number" />
+                  <TableColumn fx:id="customerFirstLevelDataTableCol" prefWidth="99.0" text="State/Province" />
+                  <TableColumn fx:id="countryTableCol" prefWidth="85.0" text="Country" />
               </columns>
             </TableView>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

@@ -1,17 +1,24 @@
 package Controller;
 
+import DAO.appointmentsQuery;
+import DAO.customerQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class customerController {
+public class customerController implements Initializable {
     public Label updateCustomersLabel;
     public TableView customersTableView;
     public TableColumn customerIdTableCol;
@@ -38,6 +45,7 @@ public class customerController {
     public Button addNewCustomerButton;
     public Button deleteCustomerButton;
     public Button backButton;
+    public TableColumn countryTableCol;
 
     public void onSaveChanges(ActionEvent actionEvent) {
     }
@@ -55,4 +63,24 @@ public class customerController {
         stage.setScene(scene);
         stage.show();
     }
-}
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            customersTableView.setItems(customerQuery.getAllCustomers());
+            customerIdTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+            customerNameTableCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+            customerAddressTableCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+            customerPostalCodeTableCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+            customerPhoneTableCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+            customerFirstLevelDataTableCol.setCellValueFactory(new PropertyValueFactory<>("stateProvince"));
+            countryTableCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+
+
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+    }
+
