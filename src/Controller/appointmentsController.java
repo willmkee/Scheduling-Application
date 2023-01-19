@@ -3,6 +3,7 @@ package Controller;
 import DAO.appointmentsQuery;
 import DAO.customerQuery;
 import Model.Appointment;
+import Model.Contact;
 import Model.Customer;
 import Model.User;
 import javafx.beans.value.ChangeListener;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -50,17 +52,17 @@ public class appointmentsController implements Initializable {
     public Label appointmentLocationLabel;
     public TextField appointmentLocationTextField;
     public Label contactLabel;
-    public ComboBox contactComboBox;
+    public ComboBox<Contact> contactComboBox;
     public Label typeLabel;
     public TextField typeTextField;
     public Label startDateLabel;
     public DatePicker startDateDatePicker;
     public Label startTimeLabel;
-    public ComboBox startTimeComboBox;
+    public ComboBox<LocalTime> startTimeComboBox;
     public Label endDateLabel;
     public DatePicker endDateDatePicker;
     public Label endTimeLabel;
-    public ComboBox endTimeComboBox;
+    public ComboBox<LocalTime> endTimeComboBox;
     public Button updateAppointmentButton;
     public Button deleteAppointmentButton;
     public Button addAppointmentButton;
@@ -120,10 +122,26 @@ public class appointmentsController implements Initializable {
             endDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
             customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+            LocalTime startBeginTime = LocalTime.of(8, 0);
+            LocalTime endBeginTime = LocalTime.of(21, 45);
+            LocalTime startEndTime = LocalTime.of(8, 15);
+            LocalTime endEndTime = LocalTime.of(22, 0);
+
+            while(startBeginTime.isBefore(endBeginTime.plusSeconds(1))){
+                startTimeComboBox.getItems().add(startBeginTime);
+                startBeginTime = startBeginTime.plusMinutes(15);
+            }
+
+            while(startEndTime.isBefore(endEndTime.plusSeconds(1))){
+                endTimeComboBox.getItems().add(startEndTime);
+                startEndTime = startEndTime.plusMinutes(15);
+            }
             try {
                 ObservableList<Customer> customers = customerQuery.getAllCustomers();
-                appointmentsCustomerIdComboBox.setPromptText("Customer ID");
-                appointmentsCustomerIdComboBox.setItems(customers);
+
+                    appointmentsCustomerIdComboBox.setItems(customers);
+
             } catch (SQLException exception) {
                 exception.printStackTrace();
             }
@@ -147,6 +165,8 @@ public class appointmentsController implements Initializable {
                     startTimeComboBox;
                     endTimeComboBox;
                     appointmentUserIdComboBox;*/
+                    startTimeComboBox.setValue(selectedAppointment.getStartDateTime().toLocalTime());
+                    endTimeComboBox.setValue(selectedAppointment.getEndDateTime().toLocalTime());
                     typeTextField.setText(selectedAppointment.getType());
                     startDateDatePicker.setValue(selectedAppointment.getStartDateTime().toLocalDate());
                     endDateDatePicker.setValue(selectedAppointment.getEndDateTime().toLocalDate());

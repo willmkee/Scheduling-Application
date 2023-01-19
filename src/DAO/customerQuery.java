@@ -63,9 +63,8 @@ public class customerQuery {
             int divisionId = rs.getInt("Division_ID");
             String stateProvince = rs.getString("Division");
             String country = rs.getString("Country");
-            Customer customer = new Customer(newCustomerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
 
-        return customer;
+        return new Customer(newCustomerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
     }
     }
 
