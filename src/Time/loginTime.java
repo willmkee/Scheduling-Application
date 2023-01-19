@@ -1,5 +1,6 @@
 package Time;
 
+import DAO.appointmentsQuery;
 import Model.appointments;
 import helper.JDBC;
 import javafx.collections.FXCollections;
@@ -12,11 +13,44 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.chrono.ChronoLocalDateTime;
+import java.time.chrono.ChronoZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class loginTime {
-    private static ChronoLocalDateTime<?> currentTime = LocalDateTime.now(ZoneId.systemDefault());
+
+    public static ZonedDateTime currentTime;
+    public static ZonedDateTime fifteenMinutesPast;
+    public static ZoneId zid;
+
+    public static ObservableList<appointments> viewUpcomingAppointments() throws SQLException {
+        ObservableList<appointments> upcomingAppointments = FXCollections.observableArrayList();
+        ObservableList<appointments> allAppointments = appointmentsQuery.getAllAppointments();
+        zid = ZoneId.systemDefault();
+        currentTime = ZonedDateTime.now(zid);
+        fifteenMinutesPast = currentTime.plus(15, ChronoUnit.MINUTES);
+
+        for (appointments appointment : allAppointments)
+        {
+            System.out.println(appointment.getStartDateTime());
+            if (appointment.getStartDateTime().atZone(zid).isAfter(ChronoZonedDateTime.from(currentTime))
+                    && appointment.getStartDateTime().atZone(zid).isBefore(ChronoZonedDateTime.from(fifteenMinutesPast)))
+            {
+                upcomingAppointments.add(appointment);
+            }
+        }
+
+        return upcomingAppointments;
+    }
+
+
+
+
+
+
+
+    /*private static ChronoLocalDateTime<?> currentTime = LocalDateTime.now(ZoneId.systemDefault());
 
     public static ObservableList<Timestamp> getAllAppointmentTimes() throws SQLException {
         ObservableList<Timestamp> allAppointmentTimes = FXCollections.observableArrayList();
@@ -52,7 +86,8 @@ public class loginTime {
         if(appointmentsSoon) {
             return nextFifteenMinutes;
         }
-    }
+    return nextFifteenMinutes;
+    }*/
 }
 
 

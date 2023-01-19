@@ -1,5 +1,9 @@
 package Controller;
 
+import Model.appointments;
+import Time.loginTime;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,9 +40,29 @@ public class loginFormController implements Initializable {
         String userName = loginUsernameTextField.getText();
         String password = loginPasswordTextField.getText();
         int validUser = passwordVerification(userName, password);
+        ObservableList<appointments> upcomingAppointments;
 
         ResourceBundle rb = ResourceBundle.getBundle("language/lang", Locale.getDefault());
         if (validUser != -1) {
+            upcomingAppointments = loginTime.viewUpcomingAppointments();
+            if(upcomingAppointments.size() > 0) {
+                appointments appointment = upcomingAppointments.get(0);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Upcoming Appointment");
+                alert.setHeaderText("Appointment within next 15 minutes");
+                alert.setContentText("Appointment ID: " + appointment.getAppointmentId() +
+                        "\nAppointment Start Time" + appointment.getStartDateTime());
+
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Upcoming Appointments");
+                alert.setHeaderText("No Upcoming Appointments");
+                alert.setContentText("No appointments within the next 15 minutes");
+
+                alert.showAndWait();
+            }
             Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene scene = new Scene(directory);
