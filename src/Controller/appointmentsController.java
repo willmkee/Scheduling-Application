@@ -2,6 +2,7 @@ package Controller;
 
 import DAO.appointmentsQuery;
 import DAO.customerQuery;
+import DAO.userQuery;
 import Model.Appointment;
 import Model.Contact;
 import Model.Customer;
@@ -139,8 +140,10 @@ public class appointmentsController implements Initializable {
             }
             try {
                 ObservableList<Customer> customers = customerQuery.getAllCustomers();
+                ObservableList<User> allUsers = userQuery.getAllUsers();
 
                     appointmentsCustomerIdComboBox.setItems(customers);
+                    appointmentUserIdComboBox.setItems(allUsers);
 
             } catch (SQLException exception) {
                 exception.printStackTrace();
@@ -157,6 +160,7 @@ public class appointmentsController implements Initializable {
                     appointmentLocationTextField.setText(selectedAppointment.getLocation());
                     try {
                         appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()));
+                        appointmentUserIdComboBox.setValue(userQuery.getUserById(selectedAppointment.getUserId()));
                     } catch (SQLException exception) {
                         exception.printStackTrace();
                     }

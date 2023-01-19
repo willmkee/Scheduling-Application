@@ -51,6 +51,8 @@ public class customerQuery {
                 "    first_level_divisions.Division,\n" +
                 "    countries.Country\n" +
                 "    FROM client_schedule.customers\n" +
+                "INNER JOIN client_schedule.first_level_divisions ON customers.Division_ID=first_level_divisions.Division_ID\n" +
+                "INNER JOIN client_schedule.countries ON first_level_divisions.Country_ID=countries.Country_ID\n" +
                 "WHERE customers.Customer_ID=" + customerId;
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();

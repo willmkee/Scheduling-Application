@@ -1,7 +1,11 @@
 package DAO;
 
+import Model.Customer;
+import Model.User;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import helper.JDBC;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,5 +28,31 @@ public abstract class userQuery {
             exception.printStackTrace();
         }
         return -1;
+    }
+
+    public static ObservableList<User> getAllUsers() throws SQLException {
+        ObservableList<User> allUsers = FXCollections.observableArrayList();
+        String sql = "SELECT users.User_ID, users.User_Name, users.Password\n" +
+                "FROM client_schedule.users";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()) {
+            int userId = rs.getInt("User_ID");
+            String userName = rs.getString("User_Name");
+            String password = rs.getString("Password");
+            User user = new User(userId, userName, password);
+            allUsers.add(user);
+        }
+        return allUsers;
+    }
+
+    public static User getUserById(int userId) throws SQLException {
+        String sql = "SELECT * FROM client_schedule.users WHERE users.User_ID=" + userId;
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String userName = rs.getString("User_Name");
+        String password = rs.getString(("Password"));
+        return new User(userId, userName, password);
     }
 }

@@ -90,6 +90,6 @@ public class Customer extends ListCell<Customer> {
 
 @Override
 public String toString() {
-    return(String.valueOf(customerId));
+    return String.valueOf(customerId);
 }
 }
