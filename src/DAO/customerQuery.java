@@ -1,7 +1,6 @@
 package DAO;
 
-import Model.appointments;
-import Model.customers;
+import Model.Customer;
 import helper.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,12 +8,11 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class customerQuery {
 
-    public static ObservableList<Model.customers> getAllCustomers() throws SQLException {
-        ObservableList<customers> allCustomers = FXCollections.observableArrayList();
+    public static ObservableList<Customer> getAllCustomers() throws SQLException {
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT customers.Customer_ID,\n" +
                 "    customers.Customer_Name,\n" +
                 "    customers.Address,\n" +
@@ -37,7 +35,7 @@ public class customerQuery {
             int divisionId = rs.getInt("Division_ID");
             String stateProvince = rs.getString("Division");
             String country = rs.getString("Country");
-            customers customer = new customers(customerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
+            Customer customer = new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
             allCustomers.add(customer);
     }
     return allCustomers;

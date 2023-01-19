@@ -1,18 +1,13 @@
 package Main;
 
-import Model.appointments;
 import helper.JDBC;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
 

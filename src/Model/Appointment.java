@@ -2,7 +2,7 @@ package Model;
 
 import java.time.LocalDateTime;
 
-public class appointments {
+public class Appointment {
     private int appointmentId;
     private String title;
     private String description;
@@ -14,7 +14,7 @@ public class appointments {
     public int userId;
     public int contactId;
 
-    public appointments(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) {
+    public Appointment(int appointmentId, String title, String description, String location, String type, LocalDateTime startDateTime, LocalDateTime endDateTime, int customerId, int userId, int contactId) {
         this.appointmentId = appointmentId;
         this.title = title;
         this.description = description;

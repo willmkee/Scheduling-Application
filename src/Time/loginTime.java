@@ -1,20 +1,13 @@
 package Time;
 
 import DAO.appointmentsQuery;
-import Model.appointments;
-import helper.JDBC;
+import Model.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.chrono.ChronoZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -24,14 +17,14 @@ public class loginTime {
     public static ZonedDateTime fifteenMinutesPast;
     public static ZoneId zid;
 
-    public static ObservableList<appointments> viewUpcomingAppointments() throws SQLException {
-        ObservableList<appointments> upcomingAppointments = FXCollections.observableArrayList();
-        ObservableList<appointments> allAppointments = appointmentsQuery.getAllAppointments();
+    public static ObservableList<Appointment> viewUpcomingAppointments() throws SQLException {
+        ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+        ObservableList<Appointment> allAppointments = appointmentsQuery.getAllAppointments();
         zid = ZoneId.systemDefault();
         currentTime = ZonedDateTime.now(zid);
         fifteenMinutesPast = currentTime.plus(15, ChronoUnit.MINUTES);
 
-        for (appointments appointment : allAppointments)
+        for (Appointment appointment : allAppointments)
         {
             System.out.println(appointment.getStartDateTime());
             if (appointment.getStartDateTime().atZone(zid).isAfter(ChronoZonedDateTime.from(currentTime))

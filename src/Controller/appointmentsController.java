@@ -1,7 +1,9 @@
 package Controller;
 
 import DAO.appointmentsQuery;
-import Model.appointments;
+import Model.Appointment;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class appointmentsController implements Initializable {
     public Label appointmentsLabel;
-    public TableView appointmentsTableView;
+    public TableView<Appointment> appointmentsTableView;
     public TableColumn appointmentTableCol;
     public TableColumn titleTableCol;
     public TableColumn descriptionTableCol;
@@ -63,8 +65,10 @@ public class appointmentsController implements Initializable {
     public TextField customerIdTextField;
     public Label userIdLabel;
     public TextField userIdTextField;
+    public ComboBox appointmentUserIdComboBox;
+    public ComboBox appointmentsCustomerIdComboBox;
     private int selectedIndex;
-    private appointments selectedAppointment;
+    private Appointment selectedAppointment;
 
     public void onAllAppointments(ActionEvent actionEvent) {
     }
@@ -113,7 +117,25 @@ public class appointmentsController implements Initializable {
             customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
+            appointmentsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue observableValue, Object o, Object t1) {
+                    Appointment selectedAppointment = appointmentsTableView.getSelectionModel().getSelectedItem();
+                    appointmentTitleTextField.setText(selectedAppointment.getTitle());
+                    appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
+                    appointmentDescriptionTextField.setText(selectedAppointment.getDescription());
+                    appointmentLocationTextField.setText(selectedAppointment.getLocation());
+                    /*contactComboBox;
+                    appointmentsCustomerIdComboBox;
+                    startTimeComboBox;
+                    endTimeComboBox;
+                    appointmentUserIdComboBox;*/
+                    typeTextField.setText(selectedAppointment.getType());
+                    startDateDatePicker.setValue(selectedAppointment.getStartDateTime().toLocalDate());
+                    endDateDatePicker.setValue(selectedAppointment.getEndDateTime().toLocalDate());
 
+                }
+            });
 
         } catch (SQLException exception) {
             exception.printStackTrace();
