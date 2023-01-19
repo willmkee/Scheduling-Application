@@ -35,7 +35,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label fx:id="customerIdLabel" minWidth="-Infinity" prefWidth="87.0" text="Customer ID" />
-                  <TextField fx:id="customerIdTextField" editable="false" minWidth="-Infinity" prefWidth="158.0" />
+                  <TextField fx:id="customerIdTextField" disable="true" editable="false" minWidth="-Infinity" prefWidth="158.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

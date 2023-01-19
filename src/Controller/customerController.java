@@ -2,6 +2,10 @@ package Controller;
 
 import DAO.appointmentsQuery;
 import DAO.customerQuery;
+import Model.Appointment;
+import Model.Customer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +24,7 @@ import java.util.ResourceBundle;
 
 public class customerController implements Initializable {
     public Label updateCustomersLabel;
-    public TableView customersTableView;
+    public TableView<Customer> customersTableView;
     public TableColumn customerIdTableCol;
     public TableColumn customerNameTableCol;
     public TableColumn customerAddressTableCol;
@@ -76,6 +80,23 @@ public class customerController implements Initializable {
             customerFirstLevelDataTableCol.setCellValueFactory(new PropertyValueFactory<>("stateProvince"));
             countryTableCol.setCellValueFactory(new PropertyValueFactory<>("country"));
 
+            customersTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+                @Override
+                public void changed(ObservableValue observableValue, Object o, Object t1) {
+                    Customer selectedCustomer = customersTableView.getSelectionModel().getSelectedItem();
+                    customerIdTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
+                    customerNameTextField.setText(selectedCustomer.getCustomerName());
+                    addressTextField.setText(selectedCustomer.getAddress());
+                    postalCodeTextField.setText(selectedCustomer.getPostalCode());
+                    phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
+                    /*
+                    countryComboBox;
+                    stateProvinceComboBox;
+
+                     */
+
+                }
+            });
 
 
         } catch (SQLException exception) {
