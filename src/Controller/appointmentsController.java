@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -124,10 +126,10 @@ public class appointmentsController implements Initializable {
             customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
-            LocalTime startBeginTime = LocalTime.of(8, 0);
-            LocalTime endBeginTime = LocalTime.of(21, 45);
-            LocalTime startEndTime = LocalTime.of(8, 15);
-            LocalTime endEndTime = LocalTime.of(22, 0);
+            LocalTime startBeginTime = LocalTime.of(1, 0);
+            LocalTime endBeginTime = LocalTime.of(14, 45);
+            LocalTime startEndTime = LocalTime.of(1, 15);
+            LocalTime endEndTime = LocalTime.of(15, 0);
 
             while(startBeginTime.isBefore(endBeginTime.plusSeconds(1))){
                 startTimeComboBox.getItems().add(startBeginTime);

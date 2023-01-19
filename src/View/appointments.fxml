@@ -109,7 +109,7 @@
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label fx:id="customerIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Customer ID" />
-                              <ComboBox fx:id="appointmentsCustomerIdComboBox" minWidth="-Infinity" prefWidth="300.0">
+                              <ComboBox fx:id="appointmentsCustomerIdComboBox" minWidth="-Infinity" prefWidth="300.0" style="-fx-effect: Null;">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>
