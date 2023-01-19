@@ -1,6 +1,8 @@
 package Model;
 
-public class Customer {
+import javafx.scene.control.ListCell;
+
+public class Customer extends ListCell<Customer> {
     private int customerId;
     private String customerName;
     private String address;
@@ -84,4 +86,10 @@ public class Customer {
     public void setCountry(String country) {
         this.country = country;
     }
+
+
+@Override
+public String toString() {
+    return(String.valueOf(customerId));
+}
 }

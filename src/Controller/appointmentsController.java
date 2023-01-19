@@ -1,9 +1,13 @@
 package Controller;
 
 import DAO.appointmentsQuery;
+import DAO.customerQuery;
 import Model.Appointment;
+import Model.Customer;
+import Model.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,8 +69,8 @@ public class appointmentsController implements Initializable {
     public TextField customerIdTextField;
     public Label userIdLabel;
     public TextField userIdTextField;
-    public ComboBox appointmentUserIdComboBox;
-    public ComboBox appointmentsCustomerIdComboBox;
+    public ComboBox<User> appointmentUserIdComboBox;
+    public ComboBox<Customer> appointmentsCustomerIdComboBox;
     private int selectedIndex;
     private Appointment selectedAppointment;
 
@@ -116,15 +120,28 @@ public class appointmentsController implements Initializable {
             endDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
             customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+            try {
+                ObservableList<Customer> customers = customerQuery.getAllCustomers();
+                appointmentsCustomerIdComboBox.setPromptText("Customer ID");
+                appointmentsCustomerIdComboBox.setItems(customers);
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
 
             appointmentsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
                 @Override
                 public void changed(ObservableValue observableValue, Object o, Object t1) {
+
                     Appointment selectedAppointment = appointmentsTableView.getSelectionModel().getSelectedItem();
                     appointmentTitleTextField.setText(selectedAppointment.getTitle());
                     appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
                     appointmentDescriptionTextField.setText(selectedAppointment.getDescription());
                     appointmentLocationTextField.setText(selectedAppointment.getLocation());
+                    try {
+                        appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()));
+                    } catch (SQLException exception) {
+                        exception.printStackTrace();
+                    }
                     /*contactComboBox;
                     appointmentsCustomerIdComboBox;
                     startTimeComboBox;

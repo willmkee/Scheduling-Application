@@ -39,4 +39,33 @@ public class customerQuery {
             allCustomers.add(customer);
     }
     return allCustomers;
-}}
+}
+
+    public static Customer getCustomerById(int customerId) throws SQLException {
+        String sql = "SELECT customers.Customer_ID,\n" +
+                "    customers.Customer_Name,\n" +
+                "    customers.Address,\n" +
+                "    customers.Postal_Code,\n" +
+                "    customers.Phone,\n" +
+                "    customers.Division_ID,\n" +
+                "    first_level_divisions.Division,\n" +
+                "    countries.Country\n" +
+                "    FROM client_schedule.customers\n" +
+                "WHERE customers.Customer_ID=" + customerId;
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+            int newCustomerId = rs.getInt("Customer_ID");
+            String customerName = rs.getString("Customer_Name");
+            String address = rs.getString("Address");
+            String postalCode = rs.getString("Postal_Code");
+            String phoneNumber = rs.getString("Phone");
+            int divisionId = rs.getInt("Division_ID");
+            String stateProvince = rs.getString("Division");
+            String country = rs.getString("Country");
+            Customer customer = new Customer(newCustomerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
+
+        return customer;
+    }
+    }
+
