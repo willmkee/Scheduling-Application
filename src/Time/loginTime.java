@@ -26,7 +26,7 @@ public class loginTime {
 
         for (Appointment appointment : allAppointments)
         {
-            System.out.println(appointment.getStartDateTime());
+            //System.out.println(appointment.getStartDateTime());
             if (appointment.getStartDateTime().atZone(zid).isAfter(ChronoZonedDateTime.from(currentTime))
                     && appointment.getStartDateTime().atZone(zid).isBefore(ChronoZonedDateTime.from(fifteenMinutesPast)))
             {
