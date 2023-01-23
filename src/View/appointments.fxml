@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.appointmentsController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.appointmentsController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="680.0" prefWidth="980.0" spacing="10.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-radius: 10;">
          <children>
@@ -109,7 +99,7 @@
                         <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label fx:id="customerIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Customer ID" />
-                              <ComboBox fx:id="appointmentsCustomerIdComboBox" minWidth="-Infinity" prefWidth="300.0" style="-fx-effect: Null;">
+                              <ComboBox fx:id="appointmentsCustomerIdComboBox" minWidth="-Infinity" prefWidth="300.0">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>

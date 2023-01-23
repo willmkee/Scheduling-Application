@@ -87,9 +87,6 @@ public class Customer extends ListCell<Customer> {
         this.country = country;
     }
 
-
-@Override
-public String toString() {
-    return String.valueOf(customerId);
-}
+    @Override
+    public String toString() { return String.valueOf(customerId); }
 }

@@ -57,7 +57,6 @@ public class customerQuery {
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         rs.next();
-            int newCustomerId = rs.getInt("Customer_ID");
             String customerName = rs.getString("Customer_Name");
             String address = rs.getString("Address");
             String postalCode = rs.getString("Postal_Code");
@@ -66,7 +65,7 @@ public class customerQuery {
             String stateProvince = rs.getString("Division");
             String country = rs.getString("Country");
 
-        return new Customer(newCustomerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
+        return new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
     }
     }
 
