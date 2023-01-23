@@ -78,6 +78,7 @@ public class appointmentsController implements Initializable {
     public TextField userIdTextField;
     public ComboBox<User> appointmentUserIdComboBox;
     public ComboBox<Customer> appointmentsCustomerIdComboBox;
+    public ComboBox<Customer> appointmentsCustomerIDComboBox;
     private int selectedIndex;
     private Appointment selectedAppointment;
 
