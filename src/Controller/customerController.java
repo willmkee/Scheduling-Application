@@ -1,11 +1,14 @@
 package Controller;
 
-import DAO.appointmentsQuery;
+import DAO.countryAccess;
 import DAO.customerQuery;
-import Model.Appointment;
+import DAO.firstLevelDivisionAccess;
+import Model.Country;
 import Model.Customer;
+import Model.FirstLevelDivision;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,8 +28,8 @@ import java.util.ResourceBundle;
 public class customerController implements Initializable {
     public Label updateCustomersLabel;
     public TableView<Customer> customersTableView;
-    public TableColumn customerIdTableCol;
-    public TableColumn customerNameTableCol;
+    public TableColumn<Object, Object> customerIdTableCol;
+    public TableColumn<Object, Object> customerNameTableCol;
     public TableColumn customerAddressTableCol;
     public TableColumn customerPostalCodeTableCol;
     public TableColumn customerPhoneTableCol;
@@ -42,9 +45,9 @@ public class customerController implements Initializable {
     public Label phoneNumberLabel;
     public TextField phoneNumberTextField;
     public Label countryLabel;
-    public ComboBox countryComboBox;
+    public ComboBox<Country> countryComboBox;
     public Label stateProvinceLabel;
-    public ComboBox stateProvinceComboBox;
+    public ComboBox<FirstLevelDivision> stateProvinceComboBox;
     public Button saveChangesButton;
     public Button addNewCustomerButton;
     public Button deleteCustomerButton;
@@ -80,6 +83,40 @@ public class customerController implements Initializable {
             customerFirstLevelDataTableCol.setCellValueFactory(new PropertyValueFactory<>("stateProvince"));
             countryTableCol.setCellValueFactory(new PropertyValueFactory<>("country"));
 
+            try {
+                countryComboBox.setItems(countryAccess.getAllCountries());
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
+
+
+            countryComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+                if (newValue == null) {
+                    stateProvinceComboBox.getItems().clear();
+                    stateProvinceComboBox.setDisable(true);
+                }
+                else {
+                    try {
+                        stateProvinceComboBox.setItems(firstLevelDivisionAccess.getStatesProvincesbyCountryName(countryComboBox.getValue().getCountryName()));
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
+                        /*try {
+                            if (newValue == "U.S") {
+                                ObservableList<FirstLevelDivision> states = firstLevelDivisionAccess.getAllStates();
+                                stateProvinceComboBox.getItems().setAll(states);
+                                stateProvinceComboBox.setDisable(false);
+                            }
+                        } catch (SQLException sqlException) {
+                            sqlException.printStackTrace();
+                        }*/
+
+
+                }
+            });
+
+
+
             customersTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
                 @Override
                 public void changed(ObservableValue observableValue, Object o, Object t1) {
@@ -89,6 +126,7 @@ public class customerController implements Initializable {
                     addressTextField.setText(selectedCustomer.getAddress());
                     postalCodeTextField.setText(selectedCustomer.getPostalCode());
                     phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
+
                     /*
                     countryComboBox;
                     stateProvinceComboBox;
@@ -103,5 +141,6 @@ public class customerController implements Initializable {
             exception.printStackTrace();
         }
     }
-    }
+
+}
 

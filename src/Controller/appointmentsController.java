@@ -163,12 +163,6 @@ public class appointmentsController implements Initializable {
         stage.show();
     }
 
-    /*public void populateAppointment(int selectedIndex, appointments selectedAppointment) {
-        this.selectedIndex = selectedIndex;
-        this.selectedAppointment = selectedAppointment;
-        appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
-    }*/
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
