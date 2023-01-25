@@ -126,7 +126,6 @@ public class customerController implements Initializable {
                     addressTextField.setText(selectedCustomer.getAddress());
                     postalCodeTextField.setText(selectedCustomer.getPostalCode());
                     phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
-
                     /*
                     countryComboBox;
                     stateProvinceComboBox;
