@@ -39,6 +39,8 @@ public class addAppointmentController {
     public Button cancelButton;
     public Label addAppointmentStartTimeLabel;
     public ComboBox addAppointmentStartTimeComboBox;
+    public ComboBox customerIdComboBox;
+    public ComboBox userIdComboBox;
 
     public void onSaveAppointment(ActionEvent actionEvent) {
     }

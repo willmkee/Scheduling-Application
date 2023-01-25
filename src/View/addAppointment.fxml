@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addAppointmentController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addAppointmentController">
     <children>
         <VBox layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="980.0" spacing="10.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-radius: 10;">
             <children>
@@ -27,7 +27,7 @@
                                 <HBox alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="100.0" prefWidth="490.0">
                                     <children>
                                         <Label fx:id="addAppointmentIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Appointment ID" />
-                                        <TextField fx:id="addAppointmentIdTextField" editable="false" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
+                                        <TextField fx:id="addAppointmentIdTextField" disable="true" editable="false" minWidth="-Infinity" prefHeight="25.0" prefWidth="300.0">
                                             <HBox.margin>
                                                 <Insets right="20.0" />
                                             </HBox.margin>
@@ -77,11 +77,11 @@
                                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                     <children>
                                         <Label fx:id="addAppointmentCustomerIdLabel" minWidth="-Infinity" prefWidth="170.0" text="Customer ID" />
-                                        <TextField fx:id="addAppointmentCustomerIdTextField" minWidth="-Infinity" prefWidth="300.0">
-                                            <HBox.margin>
-                                                <Insets right="20.0" />
-                                            </HBox.margin>
-                                        </TextField>
+                              <ComboBox fx:id="customerIdComboBox" minWidth="-Infinity" prefWidth="300.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </ComboBox>
                                     </children>
                                 </HBox>
                             </children>
@@ -137,7 +137,7 @@
                                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                     <children>
                                         <Label fx:id="addAppointmentUserIdLabel" minWidth="-Infinity" prefWidth="160.0" text="User ID" />
-                                        <TextField fx:id="addAppointmentUserIdTextField" minWidth="-Infinity" prefWidth="300.0" />
+                              <ComboBox fx:id="userIdComboBox" minWidth="-Infinity" prefWidth="300.0" />
                                     </children>
                                 </HBox>
                             </children>

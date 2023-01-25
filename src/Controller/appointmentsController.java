@@ -29,6 +29,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class appointmentsController implements Initializable {
@@ -82,7 +83,18 @@ public class appointmentsController implements Initializable {
     private int selectedIndex;
     private Appointment selectedAppointment;
 
-    public void onAllAppointments(ActionEvent actionEvent) {
+    public void onAllAppointments(ActionEvent actionEvent) throws SQLException {
+        appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+        appointmentTableCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        titleTableCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        descriptionTableCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        locationTableCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        contactTableCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        typeTableCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        startDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        endDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
     public void onAppointmentsByWeek(ActionEvent actionEvent) {
@@ -94,10 +106,53 @@ public class appointmentsController implements Initializable {
     public void onUpdateAppointment(ActionEvent actionEvent) {
     }
 
-    public void onDeleteAppointment(ActionEvent actionEvent) {
+    public void onDeleteAppointment(ActionEvent actionEvent) throws SQLException {
+        int deletedId;
+        if (appointmentIdTextField.getText().length() > 0) {
+            deletedId = Integer.parseInt(appointmentIdTextField.getText());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Appointment?");
+            alert.setHeaderText("Appointment will be deleted.");
+            alert.setContentText("Are you ok with this?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if (appointmentIdTextField.getText() != null) {
+                    if(appointmentsQuery.deleteAppointmentById(deletedId) > 0){
+                        Alert deleteSuccessfulAlert = new Alert(Alert.AlertType.ERROR);
+                        deleteSuccessfulAlert.setTitle("Appointment Deleted");
+                        deleteSuccessfulAlert.setHeaderText("Success!");
+                        deleteSuccessfulAlert.setContentText("Selected Appointment Successfully Deleted");
+
+                        deleteSuccessfulAlert.showAndWait();
+
+                        try {
+                            appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+
+
+
+                        } catch (SQLException Exception) {
+                            Exception.printStackTrace();
+                        }
+                    }
+                }
+        } } else {
+            Alert noIdAlert = new Alert(Alert.AlertType.ERROR);
+            noIdAlert.setTitle("Appointment Not Deleted");
+            noIdAlert.setHeaderText("No Appointment Selected");
+            noIdAlert.setContentText("Please select an appointment to delete.");
+
+            noIdAlert.showAndWait();
+        }
+
     }
 
-    public void onAddAppointment(ActionEvent actionEvent) {
+    public void onAddAppointment(ActionEvent actionEvent) throws IOException {
+        Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addCustomer.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCustomer);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void onMainMenu(ActionEvent actionEvent) throws IOException {
