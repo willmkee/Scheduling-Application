@@ -202,9 +202,7 @@ public class appointmentsController implements Initializable {
             }
             try {
                 ObservableList<Customer> allCustomers = customerQuery.getAllCustomers();
-                System.out.println(allCustomers);
                 ObservableList<User> allUsers = userQuery.getAllUsers();
-                System.out.println(allUsers);
                 ObservableList<Contact> allContacts = contactQuery.getAllContacts();
 
                     appointmentsCustomerIdComboBox.setItems(allCustomers);
