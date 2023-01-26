@@ -1,7 +1,13 @@
 package Controller;
 
+import DAO.countryAccess;
+import DAO.customerQuery;
+import DAO.firstLevelDivisionAccess;
+import Model.Country;
+import Model.FirstLevelDivision;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,9 +18,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class addCustomerController {
+public class addCustomerController implements Initializable {
     public Label addCustomerLabel;
     public Label addCustomerIdLabel;
     public TextField addCustomerIdTextField;
@@ -27,9 +36,9 @@ public class addCustomerController {
     public Label addPhoneNumberLabel;
     public TextField addPhoneNumberTextField;
     public Label addCountryLabel;
-    public ComboBox addCountryComboBox;
+    public ComboBox<Country> addCountryComboBox;
     public Label addStateProvinceLabel;
-    public ComboBox addStateProvinceComboBox;
+    public ComboBox<FirstLevelDivision> addStateProvinceComboBox;
     public Button addSaveChangesButton;
     public Button cancelButton;
 
@@ -42,5 +51,35 @@ public class addCustomerController {
         Scene scene = new Scene(directory);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            int newCustomerId = customerQuery.generateNewCustomerId();
+            addCustomerIdTextField.setText(String.valueOf(newCustomerId));
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        try {
+            addCountryComboBox.setItems(countryAccess.getAllCountries());
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+
+
+        addCountryComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue == null) {
+                addStateProvinceComboBox.getItems().clear();
+                addStateProvinceComboBox.setDisable(true);
+            }
+            else {
+                try {
+                    addStateProvinceComboBox.setItems(firstLevelDivisionAccess.getStatesProvincesbyCountryName(addCountryComboBox.getValue().getCountryName()));
+                } catch (SQLException sqlException) {
+                    sqlException.printStackTrace();
+                }
+            }
+        });
     }
 }

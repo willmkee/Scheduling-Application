@@ -74,5 +74,16 @@ public class customerQuery {
         int results = ps.executeUpdate();
         return results;
     }
+
+    public static int generateNewCustomerId() throws SQLException {
+        String sql = "SELECT AUTO_INCREMENT\n" +
+                "FROM information_schema.TABLES\n" +
+                "WHERE TABLE_SCHEMA = \"client_schedule\"\n" +
+                "AND TABLE_NAME = \"customers\"";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt("AUTO_INCREMENT");
+    }
 }
 
