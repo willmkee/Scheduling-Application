@@ -40,4 +40,9 @@ public class appointmentsQuery {
         int rs = ps.executeUpdate();
         return rs;
     }
+
+    public static void deleteAppointmentsByCustomerId(int customerId) throws SQLException {
+        String sql = "DELETE FROM client_schedule.appointments WHERE Customer_ID=" + customerId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+    }
 }

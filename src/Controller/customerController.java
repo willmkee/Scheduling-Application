@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.appointmentsQuery;
 import DAO.countryAccess;
 import DAO.customerQuery;
 import DAO.firstLevelDivisionAccess;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class customerController implements Initializable {
@@ -57,10 +59,52 @@ public class customerController implements Initializable {
     public void onSaveChanges(ActionEvent actionEvent) {
     }
 
-    public void onAddNewCustomer(ActionEvent actionEvent) {
+    public void onAddNewCustomer(ActionEvent actionEvent) throws IOException {
+        Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addCustomer.fxml")));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCustomer);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onDeleteCustomer(ActionEvent actionEvent) {
+    public void onDeleteCustomer(ActionEvent actionEvent) throws SQLException {
+        int deletedId;
+        if (customerIdTextField.getText().length() > 0) {
+            deletedId = Integer.parseInt(customerIdTextField.getText());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Customer?");
+            alert.setHeaderText("Customer and all associated appointments will be deleted.");
+            alert.setContentText("Are you ok with this?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if (customerIdTextField.getText() != null) {
+                    appointmentsQuery.deleteAppointmentsByCustomerId(deletedId);
+                    if (customerQuery.deleteCustomerById(deletedId) > 0){
+                        Alert customerDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
+                        customerDeletedAlert.setTitle("Customer Deleted");
+                        customerDeletedAlert.setHeaderText("Success!");
+                        customerDeletedAlert.setContentText("Customer and appointments successfully deleted.");
+                        customerDeletedAlert.showAndWait();
+
+                        customerIdTextField.setText("");
+                        customerNameTextField.setText(null);
+                        addressTextField.setText(null);
+                        postalCodeTextField.setText(null);
+                        phoneNumberTextField.setText(null);
+                        countryComboBox.setValue(null);
+                        stateProvinceComboBox.setValue(null);
+                        customersTableView.setItems(customerQuery.getAllCustomers());
+                    }
+                }
+            } } else {
+            Alert noIdAlert = new Alert(Alert.AlertType.ERROR);
+            noIdAlert.setTitle("Customer Not Deleted");
+            noIdAlert.setHeaderText("No Customer Selected");
+            noIdAlert.setContentText("Please select a customer to delete.");
+
+            noIdAlert.showAndWait();
+        }
     }
 
     public void onBack(ActionEvent actionEvent) throws IOException {
@@ -101,17 +145,6 @@ public class customerController implements Initializable {
                     } catch (SQLException sqlException) {
                         sqlException.printStackTrace();
                     }
-                        /*try {
-                            if (newValue == "U.S") {
-                                ObservableList<FirstLevelDivision> states = firstLevelDivisionAccess.getAllStates();
-                                stateProvinceComboBox.getItems().setAll(states);
-                                stateProvinceComboBox.setDisable(false);
-                            }
-                        } catch (SQLException sqlException) {
-                            sqlException.printStackTrace();
-                        }*/
-
-
                 }
             });
 
@@ -121,17 +154,23 @@ public class customerController implements Initializable {
                 @Override
                 public void changed(ObservableValue observableValue, Object o, Object t1) {
                     Customer selectedCustomer = customersTableView.getSelectionModel().getSelectedItem();
+                    if(selectedCustomer != null) {
                     customerIdTextField.setText(String.valueOf(selectedCustomer.getCustomerId()));
                     customerNameTextField.setText(selectedCustomer.getCustomerName());
                     addressTextField.setText(selectedCustomer.getAddress());
                     postalCodeTextField.setText(selectedCustomer.getPostalCode());
                     phoneNumberTextField.setText(selectedCustomer.getPhoneNumber());
-                    /*
-                    countryComboBox;
-                    stateProvinceComboBox;
-
-                     */
-
+                    try {
+                        countryComboBox.setValue(countryAccess.getCountryByName(selectedCustomer.getCountry()));
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
+                    try {
+                        stateProvinceComboBox.setValue(firstLevelDivisionAccess.getStateProvincesByName(selectedCustomer.getStateProvince()));
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    }
+                }
                 }
             });
 

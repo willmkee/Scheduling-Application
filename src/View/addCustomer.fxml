@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addCustomerController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.addCustomerController">
     <children>
         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" spacing="10.0" style="-fx-border-style: solid; -fx-border-color: black; -fx-border-radius: 10;">
             <children>
@@ -22,7 +22,7 @@
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                     <children>
                         <Label fx:id="addCustomerIdLabel" minWidth="-Infinity" prefWidth="87.0" text="Customer ID" />
-                        <TextField fx:id="addCustomerIdTextField" editable="false" minWidth="-Infinity" prefWidth="158.0" />
+                        <TextField fx:id="addCustomerIdTextField" disable="true" editable="false" minWidth="-Infinity" prefWidth="158.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">

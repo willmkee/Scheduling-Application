@@ -96,4 +96,16 @@ public class firstLevelDivisionAccess {
         return allProvinces;
     }
 
+    public static FirstLevelDivision getStateProvincesByName(String stateProvince) throws SQLException {
+        String sql = "SELECT Division_ID, Division, Country_ID FROM client_schedule.first_level_divisions WHERE Division=\"" + stateProvince +"\";";
+
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int divisionId = rs.getInt("Division_ID");
+        String divisionName = rs.getString("Division");
+        int countryId = rs.getInt("Country_ID");
+        FirstLevelDivision newState = new FirstLevelDivision(divisionId, divisionName, countryId);
+        return newState;
+    }
 }

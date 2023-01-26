@@ -126,14 +126,22 @@ public class appointmentsController implements Initializable {
 
                         deleteSuccessfulAlert.showAndWait();
 
-                        try {
-                            appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+                        appointmentTitleTextField.setText(null);
+                        appointmentIdTextField.setText("");
+                        appointmentDescriptionTextField.setText(null);
+                        appointmentLocationTextField.setText(null);
+                        appointmentsCustomerIdComboBox.setValue(null);
+                        appointmentUserIdComboBox.setValue(null);
+                        contactComboBox.setValue(null);
+                        startTimeComboBox.setValue(null);
+                        endTimeComboBox.setValue(null);
+                        typeTextField.setText(null);
+                        startDateDatePicker.setValue(null);
+                        endDateDatePicker.setValue(null);
+                        appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
 
 
 
-                        } catch (SQLException Exception) {
-                            Exception.printStackTrace();
-                        }
                     }
                 }
         } } else {
@@ -212,24 +220,26 @@ public class appointmentsController implements Initializable {
                 public void changed(ObservableValue observableValue, Object o, Object t1) {
 
                     Appointment selectedAppointment = appointmentsTableView.getSelectionModel().getSelectedItem();
-                    appointmentTitleTextField.setText(selectedAppointment.getTitle());
-                    appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
-                    appointmentDescriptionTextField.setText(selectedAppointment.getDescription());
-                    appointmentLocationTextField.setText(selectedAppointment.getLocation());
-                    try {
-                        appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()));
-                        //System.out.println(appointmentsCustomerIdComboBox.getValue());
-                        appointmentUserIdComboBox.setValue(userQuery.getUserById(selectedAppointment.getUserId()));
-                        contactComboBox.setValue(contactQuery.getContactById(selectedAppointment.getContactId()));
-                    } catch (SQLException exception) {
-                        exception.printStackTrace();
-                    }
-                    startTimeComboBox.setValue(selectedAppointment.getStartDateTime().toLocalTime());
-                    endTimeComboBox.setValue(selectedAppointment.getEndDateTime().toLocalTime());
-                    typeTextField.setText(selectedAppointment.getType());
-                    startDateDatePicker.setValue(selectedAppointment.getStartDateTime().toLocalDate());
-                    endDateDatePicker.setValue(selectedAppointment.getEndDateTime().toLocalDate());
+                    if (selectedAppointment != null) {
+                        appointmentTitleTextField.setText(selectedAppointment.getTitle());
+                        appointmentIdTextField.setText(String.valueOf(selectedAppointment.getAppointmentId()));
+                        appointmentDescriptionTextField.setText(selectedAppointment.getDescription());
+                        appointmentLocationTextField.setText(selectedAppointment.getLocation());
+                        try {
+                            appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()));
+                            //System.out.println(appointmentsCustomerIdComboBox.getValue());
+                            appointmentUserIdComboBox.setValue(userQuery.getUserById(selectedAppointment.getUserId()));
+                            contactComboBox.setValue(contactQuery.getContactById(selectedAppointment.getContactId()));
+                        } catch (SQLException exception) {
+                            exception.printStackTrace();
+                        }
+                        startTimeComboBox.setValue(selectedAppointment.getStartDateTime().toLocalTime());
+                        endTimeComboBox.setValue(selectedAppointment.getEndDateTime().toLocalTime());
+                        typeTextField.setText(selectedAppointment.getType());
+                        startDateDatePicker.setValue(selectedAppointment.getStartDateTime().toLocalDate());
+                        endDateDatePicker.setValue(selectedAppointment.getEndDateTime().toLocalDate());
 
+                    }
                 }
             });
 

@@ -24,4 +24,14 @@ public class countryAccess {
         }
         return allCountries;
     }
+
+    public static Country getCountryByName(String countryName) throws SQLException {
+        String sql = "SELECT * FROM client_schedule.countries WHERE Country=\"" + countryName + "\";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int countryId = rs.getInt("Country_ID");
+        Country newCountry = new Country(countryId, countryName);
+        return newCountry;
+    }
 }

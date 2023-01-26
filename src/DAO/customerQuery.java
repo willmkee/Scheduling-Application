@@ -67,5 +67,12 @@ public class customerQuery {
 
         return new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
     }
+
+    public static int deleteCustomerById(int deletedId) throws SQLException {
+        String sql = "DELETE FROM client_schedule.customers WHERE customers.Customer_ID=" + deletedId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        int results = ps.executeUpdate();
+        return results;
     }
+}
 
