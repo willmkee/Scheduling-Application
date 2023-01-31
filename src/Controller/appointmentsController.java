@@ -156,7 +156,7 @@ public class appointmentsController implements Initializable {
     }
 
     public void onAddAppointment(ActionEvent actionEvent) throws IOException {
-        Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addCustomer.fxml")));
+        Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addAppointment.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(addCustomer);
         stage.setScene(scene);

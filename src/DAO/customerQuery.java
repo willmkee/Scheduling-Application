@@ -82,5 +82,14 @@ public class customerQuery {
         int results = ps.executeUpdate();
         return results;
     }
+
+    public static int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
+        String sql = "UPDATE client_schedule.customers\n" +
+                "SET Customer_Name = \"" + customerName + "\", Address = \"" + address + "\", Postal_Code = \"" + postalCode + "\", Phone = \"" + phone + "\", Division_ID = " + divisionId + ", Last_Update = NOW(), Last_Updated_By = 'script' \n" +
+                "WHERE Customer_ID = " + customerId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        int results = ps.executeUpdate();
+        return results;
+    }
 }
 

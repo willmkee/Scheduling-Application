@@ -56,7 +56,42 @@ public class customerController implements Initializable {
     public Button backButton;
     public TableColumn countryTableCol;
 
-    public void onSaveChanges(ActionEvent actionEvent) {
+    public void onSaveChanges(ActionEvent actionEvent) throws SQLException {
+        if((customerNameTextField.getText().length() > 0) && (addressTextField.getText().length() > 0) && (postalCodeTextField.getText().length() > 0) && (phoneNumberTextField.getText().length() > 0) && (countryComboBox.getValue() != null) && (stateProvinceComboBox != null)) {
+            String customerName = customerNameTextField.getText();
+            String customerAddress = addressTextField.getText();
+            String postalCode = postalCodeTextField.getText();
+            String phone = phoneNumberTextField.getText();
+            int customerId = Integer.parseInt(customerIdTextField.getText());
+            FirstLevelDivision stateProvince = stateProvinceComboBox.getValue();
+            int stateProvinceId = stateProvince.getDivisionId();
+            int updateSuccess = customerQuery.updateCustomer(customerId, customerName, customerAddress, postalCode, phone, stateProvinceId);
+
+            if (updateSuccess > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("Customer successfully updated!");
+
+                alert.showAndWait();
+                customersTableView.setItems(customerQuery.getAllCustomers());
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Empty Fields");
+                alert.setContentText("Please fill in all customer information.");
+
+                alert.showAndWait();
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Empty Fields");
+            alert.setContentText("Please fill in all customer information.");
+
+            alert.showAndWait();
+        }
     }
 
     public void onAddNewCustomer(ActionEvent actionEvent) throws IOException {
