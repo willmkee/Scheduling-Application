@@ -75,15 +75,12 @@ public class customerQuery {
         return results;
     }
 
-    public static int generateNewCustomerId() throws SQLException {
-        String sql = "SELECT AUTO_INCREMENT\n" +
-                "FROM information_schema.TABLES\n" +
-                "WHERE TABLE_SCHEMA = \"client_schedule\"\n" +
-                "AND TABLE_NAME = \"customers\"";
+    public static int addNewCustomer(String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
+        String sql = "INSERT INTO client_schedule.customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID)\n" +
+                "VALUES('" + customerName + "', '" + address + "', '" + postalCode + "', '" + phone + "', NOW(), 'script', NOW(), 'script', " + divisionId + ");";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getInt("AUTO_INCREMENT");
+        int results = ps.executeUpdate();
+        return results;
     }
 }
 

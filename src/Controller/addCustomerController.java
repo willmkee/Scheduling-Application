@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,7 +39,39 @@ public class addCustomerController implements Initializable {
     public Button addSaveChangesButton;
     public Button cancelButton;
 
-    public void onAddSaveChanges(ActionEvent actionEvent) {
+    public void onAddSaveChanges(ActionEvent actionEvent) throws SQLException, IOException {
+        if((addCustomerNameTextField.getText().length() > 0) && (addAddressTextField.getText().length() > 0) && (addPostalCodeTextField.getText().length() > 0) && (addPhoneNumberTextField.getText().length() > 0) && (addCountryComboBox.getValue() != null) && (addStateProvinceComboBox != null)) {
+            String customerName = addCustomerNameTextField.getText();
+            String address = addAddressTextField.getText();
+            String postalCode = addPostalCodeTextField.getText();
+            FirstLevelDivision state = addStateProvinceComboBox.getValue();
+            int stateId = state.getDivisionId();
+            String phone = addPhoneNumberTextField.getText();
+
+            int addCustomer = customerQuery.addNewCustomer(customerName, address, postalCode, phone, stateId);
+
+            if (addCustomer > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setHeaderText(null);
+                alert.setContentText("New customer successfully added!");
+
+                alert.showAndWait();
+
+                Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
+                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Scene scene = new Scene(directory);
+                stage.setScene(scene);
+                stage.show();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Empty Fields");
+            alert.setContentText("Please fill in all customer information.");
+
+            alert.showAndWait();
+        }
     }
 
     public void onCancel(ActionEvent actionEvent) throws IOException {
@@ -55,12 +84,6 @@ public class addCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            int newCustomerId = customerQuery.generateNewCustomerId();
-            addCustomerIdTextField.setText(String.valueOf(newCustomerId));
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
         try {
             addCountryComboBox.setItems(countryAccess.getAllCountries());
         } catch (SQLException sqlException) {
