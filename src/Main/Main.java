@@ -1,5 +1,6 @@
 package Main;
 
+import DAO.appointmentsQuery;
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Main extends Application {
@@ -21,7 +23,7 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();

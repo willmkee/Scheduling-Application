@@ -88,5 +88,10 @@ public class Customer extends ListCell<Customer> {
     }
 
     @Override
-    public String toString() { return String.valueOf(customerId); }
+    public String toString() {
+        return String.valueOf(customerId);
+    }
+
+    /*@Override
+    public String toString() { return "show"/*String.valueOf(customerId)}*/;
 }

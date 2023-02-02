@@ -8,7 +8,8 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.time.*;
 
 public class appointmentsQuery {
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
@@ -16,14 +17,19 @@ public class appointmentsQuery {
         String sql = "SELECT * FROM client_schedule.appointments;";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
+        final ZoneId localZone = ZoneId.systemDefault();
         while(rs.next()) {
             int appointmentId = rs.getInt("Appointment_ID");
             String title = rs.getString("Title");
             String description = rs.getString("Description");
             String location = rs.getString("Location");
             String type = rs.getString("Type");
-            LocalDateTime startDateTime = rs.getTimestamp("Start").toLocalDateTime();
-            LocalDateTime endDateTime = rs.getTimestamp("End").toLocalDateTime();
+            Timestamp startTime = rs.getTimestamp("Start");
+            ZonedDateTime zStartTime = startTime.toInstant().atZone(localZone);
+            LocalDateTime startDateTime = zStartTime.toLocalDateTime();
+            Timestamp endTime = rs.getTimestamp("End");
+            ZonedDateTime zEndTime = endTime.toInstant().atZone(localZone);
+            LocalDateTime endDateTime = zEndTime.toLocalDateTime();
             int customerId = rs.getInt("Customer_ID");
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");

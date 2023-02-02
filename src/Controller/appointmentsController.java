@@ -25,9 +25,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -78,8 +76,8 @@ public class appointmentsController implements Initializable {
     public Label userIdLabel;
     public TextField userIdTextField;
     public ComboBox<User> appointmentUserIdComboBox;
-    public ComboBox<Customer> appointmentsCustomerIdComboBox;
-    public ComboBox<Customer> appointmentsCustomerIDComboBox;
+    public ComboBox appointmentsCustomerIdComboBox;
+    //public ComboBox<Customer> appointmentsCustomerIDComboBox;
     private int selectedIndex;
     private Appointment selectedAppointment;
 
@@ -186,10 +184,31 @@ public class appointmentsController implements Initializable {
             customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
             userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
-            LocalTime startBeginTime = LocalTime.of(1, 0);
-            LocalTime endBeginTime = LocalTime.of(14, 45);
-            LocalTime startEndTime = LocalTime.of(1, 15);
-            LocalTime endEndTime = LocalTime.of(15, 0);
+
+            LocalDateTime startEastern = LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0));
+            ZonedDateTime zoneStartEastern = startEastern.atZone(ZoneId.of("America/New_York"));
+            ZonedDateTime zoneStartLocal = zoneStartEastern.withZoneSameInstant(ZoneId.systemDefault());
+            LocalDateTime startLocal = zoneStartLocal.toLocalDateTime();
+            LocalTime startBeginTime = startLocal.toLocalTime();
+
+            LocalDateTime endEastern = LocalDateTime.of(LocalDate.now(), LocalTime.of(21, 45));
+            ZonedDateTime zoneEndEastern = endEastern.atZone(ZoneId.of("America/New_York"));
+            ZonedDateTime zoneEndLocal = zoneEndEastern.withZoneSameInstant(ZoneId.systemDefault());
+            LocalDateTime endLocal = zoneEndLocal.toLocalDateTime();
+            LocalTime endBeginTime = endLocal.toLocalTime();
+
+            LocalDateTime appointmentEndEastern = LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 15));
+            ZonedDateTime zoneAppointmentEndEastern = appointmentEndEastern.atZone(ZoneId.of("America/New_York"));
+            ZonedDateTime zoneAppointmentEndLocal = zoneAppointmentEndEastern.withZoneSameInstant(ZoneId.systemDefault());
+            LocalDateTime appointmentEndLocal = zoneAppointmentEndLocal.toLocalDateTime();
+            LocalTime startEndTime = appointmentEndLocal.toLocalTime();
+
+            LocalDateTime appointmentEndTimeEastern = LocalDateTime.of(LocalDate.now(), LocalTime.of(22, 00));
+            ZonedDateTime zoneAppointmentEndTimeEastern = appointmentEndTimeEastern.atZone(ZoneId.of("America/New_York"));
+            ZonedDateTime zoneAppointmentEndTimeLocal = zoneAppointmentEndTimeEastern.withZoneSameInstant(ZoneId.systemDefault());
+            LocalDateTime appointmentEndTimeLocal = zoneAppointmentEndTimeLocal.toLocalDateTime();
+            LocalTime endEndTime = appointmentEndTimeLocal.toLocalTime();
+
 
             while(startBeginTime.isBefore(endBeginTime.plusSeconds(1))){
                 startTimeComboBox.getItems().add(startBeginTime);
@@ -202,10 +221,15 @@ public class appointmentsController implements Initializable {
             }
             try {
                 ObservableList<Customer> allCustomers = customerQuery.getAllCustomers();
+                ObservableList<String> allCustomers2 = FXCollections.observableArrayList();
+
+                for (Customer c: allCustomers) {
+                    allCustomers2.add(c.toString());
+                }
                 ObservableList<User> allUsers = userQuery.getAllUsers();
                 ObservableList<Contact> allContacts = contactQuery.getAllContacts();
 
-                    appointmentsCustomerIdComboBox.setItems(allCustomers);
+                    appointmentsCustomerIdComboBox.setItems(allCustomers2);
                     appointmentUserIdComboBox.setItems(allUsers);
                     contactComboBox.setItems(allContacts);
 
@@ -224,7 +248,7 @@ public class appointmentsController implements Initializable {
                         appointmentDescriptionTextField.setText(selectedAppointment.getDescription());
                         appointmentLocationTextField.setText(selectedAppointment.getLocation());
                         try {
-                            appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()));
+                            appointmentsCustomerIdComboBox.setValue(customerQuery.getCustomerById(selectedAppointment.getCustomerId()).toString());
                             //System.out.println(appointmentsCustomerIdComboBox.getValue());
                             appointmentUserIdComboBox.setValue(userQuery.getUserById(selectedAppointment.getUserId()));
                             contactComboBox.setValue(contactQuery.getContactById(selectedAppointment.getContactId()));
