@@ -25,11 +25,13 @@ public class appointmentsQuery {
             String location = rs.getString("Location");
             String type = rs.getString("Type");
             Timestamp startTime = rs.getTimestamp("Start");
-            ZonedDateTime zStartTime = startTime.toInstant().atZone(localZone);
-            LocalDateTime startDateTime = zStartTime.toLocalDateTime();
+            LocalDateTime startDateTime = startTime.toLocalDateTime();
+            //ZonedDateTime zStartTime = startTime.toInstant().atZone(localZone);
+            //LocalDateTime startDateTime = zStartTime.toLocalDateTime();
             Timestamp endTime = rs.getTimestamp("End");
-            ZonedDateTime zEndTime = endTime.toInstant().atZone(localZone);
-            LocalDateTime endDateTime = zEndTime.toLocalDateTime();
+            LocalDateTime endDateTime = endTime.toLocalDateTime();
+            //ZonedDateTime zEndTime = endTime.toInstant().atZone(localZone);
+            //LocalDateTime endDateTime = zEndTime.toLocalDateTime();
             int customerId = rs.getInt("Customer_ID");
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");
