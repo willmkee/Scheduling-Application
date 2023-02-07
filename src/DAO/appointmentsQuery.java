@@ -51,7 +51,7 @@ public class appointmentsQuery {
     }
 
     public static int updateAppointment(int appointmentId, String ldt) throws SQLException {
-        String sql = "UPDATE client_schedule.appointments SET Start =" + ldt + " WHERE Appointment_ID =" + appointmentId + ";";
+        String sql = "UPDATE client_schedule.appointments SET Start =\"" + ldt + "\" WHERE Appointment_ID =" + appointmentId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         int rs = ps.executeUpdate();
         return rs;

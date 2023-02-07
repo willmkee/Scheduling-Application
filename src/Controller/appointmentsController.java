@@ -106,11 +106,14 @@ public class appointmentsController implements Initializable {
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
         int id = Integer.parseInt(appointmentIdTextField.getText());
         LocalDate ld = startDateDatePicker.getValue();
-        String startDate = ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String startTime = String.valueOf(startTimeComboBox.getValue());
-        String startUTC = startDate + " " + startTime + ":00";
+        LocalTime st = startTimeComboBox.getValue();
+        LocalDateTime ldt = LocalDateTime.of(ld, st);
+        ZonedDateTime systemTime = ldt.atZone(ZoneId.systemDefault());
+        ZonedDateTime utc = systemTime.withZoneSameInstant(ZoneId.of("UTC"));
+        LocalDateTime localOut = utc.toLocalDateTime();
+        String utcOut = localOut.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        appointmentsQuery.updateAppointment(id, startUTC);
+        appointmentsQuery.updateAppointment(id, utcOut);
         appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
     }
 
