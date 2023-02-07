@@ -25,7 +25,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -101,7 +103,15 @@ public class appointmentsController implements Initializable {
     public void onAppointmentsByMonth(ActionEvent actionEvent) {
     }
 
-    public void onUpdateAppointment(ActionEvent actionEvent) {
+    public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
+        int id = Integer.parseInt(appointmentIdTextField.getText());
+        LocalDate ld = startDateDatePicker.getValue();
+        String startDate = ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String startTime = String.valueOf(startTimeComboBox.getValue());
+        String startUTC = startDate + " " + startTime + ":00";
+
+        appointmentsQuery.updateAppointment(id, startUTC);
+        appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
     }
 
     public void onDeleteAppointment(ActionEvent actionEvent) throws SQLException {

@@ -26,12 +26,8 @@ public class appointmentsQuery {
             String type = rs.getString("Type");
             Timestamp startTime = rs.getTimestamp("Start");
             LocalDateTime startDateTime = startTime.toLocalDateTime();
-            //ZonedDateTime zStartTime = startTime.toInstant().atZone(localZone);
-            //LocalDateTime startDateTime = zStartTime.toLocalDateTime();
             Timestamp endTime = rs.getTimestamp("End");
             LocalDateTime endDateTime = endTime.toLocalDateTime();
-            //ZonedDateTime zEndTime = endTime.toInstant().atZone(localZone);
-            //LocalDateTime endDateTime = zEndTime.toLocalDateTime();
             int customerId = rs.getInt("Customer_ID");
             int userId = rs.getInt("User_ID");
             int contactId = rs.getInt("Contact_ID");
@@ -52,5 +48,12 @@ public class appointmentsQuery {
     public static void deleteAppointmentsByCustomerId(int customerId) throws SQLException {
         String sql = "DELETE FROM client_schedule.appointments WHERE Customer_ID=" + customerId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+    }
+
+    public static int updateAppointment(int appointmentId, String ldt) throws SQLException {
+        String sql = "UPDATE client_schedule.appointments SET Start =" + ldt + " WHERE Appointment_ID =" + appointmentId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        int rs = ps.executeUpdate();
+        return rs;
     }
 }
