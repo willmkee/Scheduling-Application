@@ -105,39 +105,78 @@ public class appointmentsController implements Initializable {
     }
 
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
-        int id = Integer.parseInt(appointmentIdTextField.getText());
-        LocalDate startDate = startDateDatePicker.getValue();
-        LocalTime startTime = startTimeComboBox.getValue();
-        String utcStart = loginTime.convertToUtc(startDate, startTime);
-        LocalDate endDate = endDateDatePicker.getValue();
-        LocalTime endTime = endTimeComboBox.getValue();
-        String utcEnd = loginTime.convertToUtc(endDate, endTime);
-        String title = appointmentTitleTextField.getText();
-        String description = appointmentDescriptionTextField.getText();
-        String location = appointmentLocationTextField.getText();
-        int contactId = Integer.parseInt(String.valueOf(contactComboBox.getValue()));
-        int customerId = Integer.parseInt(String.valueOf(appointmentsCustomerIdComboBox.getValue()));
-        String type = typeTextField.getText();
-        int userId = Integer.parseInt(String.valueOf(appointmentUserIdComboBox.getValue()));
-        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
-        LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
+        if (appointmentTitleTextField.getText().length() > 0 && appointmentIdTextField.getText().length() > 0 && appointmentDescriptionTextField.getText().length() >0 && appointmentLocationTextField.getText().length() > 0 && contactComboBox.getValue() != null && appointmentsCustomerIdComboBox.getValue() != null && typeTextField.getText().length() > 0 && endTimeComboBox.getValue() != null && startDateDatePicker != null && startTimeComboBox.getValue() != null && appointmentUserIdComboBox.getValue() != null) {
+            int id = Integer.parseInt(appointmentIdTextField.getText());
+            LocalDate startDate = startDateDatePicker.getValue();
+            LocalTime startTime = startTimeComboBox.getValue();
+            String utcStart = loginTime.convertToUtc(startDate, startTime);
+            LocalDate endDate = endDateDatePicker.getValue();
+            LocalTime endTime = endTimeComboBox.getValue();
+            String utcEnd = loginTime.convertToUtc(endDate, endTime);
+            String title = appointmentTitleTextField.getText();
+            String description = appointmentDescriptionTextField.getText();
+            String location = appointmentLocationTextField.getText();
+            int contactId = contactComboBox.getValue().getContactId();
+            int customerId = Integer.parseInt(String.valueOf(appointmentsCustomerIdComboBox.getValue()));
+            String type = typeTextField.getText();
+            int userId = Integer.parseInt(String.valueOf(appointmentUserIdComboBox.getValue()));
+            LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+            LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
+            if (startDateTime.isAfter(endDateTime)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Time Error");
+                alert.setContentText("Start Date and Time must be before End Date and Time");
 
-        if (appointmentIdTextField.getText() != null && title != null && description != null && location != null && contactComboBox.getValue() != null && appointmentsCustomerIdComboBox.getValue() != null && type != null && endTime != null && startDate != null && startTime != null && appointmentUserIdComboBox.getValue() != null) {
-            if(loginTime.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
-                int i = appointmentsQuery.updateAppointment();
+                alert.showAndWait();
+            }
+            else if(!loginTime.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
+                int i = appointmentsQuery.updateAppointment(id, utcStart, utcEnd, title, description, location, contactId, customerId, userId, type);
                 if (i > 0) {
-                    //Alert Success
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Appointment successfully updated!");
+
+                    alert.showAndWait();
+                    appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+                    appointmentIdTextField.setText("");
+                    appointmentTitleTextField.setText("");
+                    appointmentDescriptionTextField.setText("");
+                    appointmentLocationTextField.setText("");
+                    contactComboBox.setValue(null);
+                    appointmentsCustomerIdComboBox.setValue(null);
+                    typeTextField.setText("");
+                    startDateDatePicker.setValue(null);
+                    endDateDatePicker.setValue(null);
+                    startTimeComboBox.setValue(null);
+                    endTimeComboBox.setValue(null);
+                    appointmentUserIdComboBox.setValue(null);
+
                 } else {
-                    //Alert Failure
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("Failure");
+                    alert.setContentText("Appointment failed to update.");
+
+                    alert.showAndWait();
                 }
             } else {
-                //ALERT appointments overlap
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Failure");
+                alert.setContentText("Appointment time overlaps");
+
+                alert.showAndWait();
             }
         } else {
-            //ALERT
-        }
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Fields left blank");
+            alert.setContentText("Complete all fields");
 
-        appointmentsQuery.updateAppointment(id, utcStart);
+            alert.showAndWait();
+        }
         appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
     }
 

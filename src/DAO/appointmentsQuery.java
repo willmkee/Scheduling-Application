@@ -50,8 +50,8 @@ public class appointmentsQuery {
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
     }
 
-    public static int updateAppointment(int appointmentId, String ldt) throws SQLException {
-        String sql = "UPDATE client_schedule.appointments SET Start =\"" + ldt + "\" WHERE Appointment_ID =" + appointmentId + ";";
+    public static int updateAppointment(int appointmentId, String start, String end, String title, String description, String location, int contactId, int customerId, int userId, String type) throws SQLException {
+        String sql = "UPDATE client_schedule.appointments SET Start =\"" + start + "\", End =\"" + end + "\", Title=\"" + title + "\", Description=\"" + description + "\", Location=\"" + location + "\", Contact_ID=" + contactId +", Customer_ID=" + customerId + ", User_ID=" + userId + ", Type =\"" + type +"\", Last_Update = NOW(), Last_Updated_By = 'script' WHERE Appointment_ID =" + appointmentId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         int rs = ps.executeUpdate();
         return rs;

@@ -78,8 +78,8 @@ public class customerController implements Initializable {
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
-                alert.setHeaderText("Empty Fields");
-                alert.setContentText("Please fill in all customer information.");
+                alert.setHeaderText("Failure");
+                alert.setContentText("Customer failed to update.");
 
                 alert.showAndWait();
             }
