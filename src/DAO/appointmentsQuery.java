@@ -56,4 +56,27 @@ public class appointmentsQuery {
         int rs = ps.executeUpdate();
         return rs;
     }
+
+    public static ObservableList<Appointment> getAppointmentsByCustomerId(int customerId) throws SQLException {
+        ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM client_schedule.appointments WHERE Customer_ID=" + customerId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int appointmentId = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            Timestamp startTime = rs.getTimestamp("Start");
+            LocalDateTime startDateTime = startTime.toLocalDateTime();
+            Timestamp endTime = rs.getTimestamp("End");
+            LocalDateTime endDateTime = endTime.toLocalDateTime();
+            int userId = rs.getInt("User_ID");
+            int contactId = rs.getInt("Contact_ID");
+            Appointment appointment = new Appointment(appointmentId, title, description, location, type, startDateTime, endDateTime,customerId, userId, contactId);
+            customerAppointments.add(appointment);
+        }
+        return customerAppointments;
+    }
 }

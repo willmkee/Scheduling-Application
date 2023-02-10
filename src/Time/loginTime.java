@@ -6,9 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.chrono.ChronoZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class loginTime {
@@ -37,7 +37,28 @@ public class loginTime {
         return upcomingAppointments;
     }
 
+    public static String convertToUtc(LocalDate ld, LocalTime st) {
+        LocalDateTime ldt = LocalDateTime.of(ld, st);
+        ZonedDateTime systemTime = ldt.atZone(ZoneId.systemDefault());
+        ZonedDateTime utcZone = systemTime.withZoneSameInstant(ZoneId.of("UTC"));
+        LocalDateTime localZone = utcZone.toLocalDateTime();
+        String utc = localZone.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return utc;
+    }
 
+    public static boolean appointmentUpdateOverlap(int appointmentId, int customerId, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
+        boolean overlap = false;
+        ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
+        customerAppointments = appointmentsQuery.getAppointmentsByCustomerId(customerId);
+        for (Appointment a: customerAppointments) {
+            if(a.getAppointmentId() != appointmentId) {
+                if () {
+                    overlap = true;
+                }
+            }
+        }
+        return overlap;
+    }
 
 
 

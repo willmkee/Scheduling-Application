@@ -8,6 +8,7 @@ import Model.Appointment;
 import Model.Contact;
 import Model.Customer;
 import Model.User;
+import Time.loginTime;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -105,15 +106,33 @@ public class appointmentsController implements Initializable {
 
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
         int id = Integer.parseInt(appointmentIdTextField.getText());
-        LocalDate ld = startDateDatePicker.getValue();
-        LocalTime st = startTimeComboBox.getValue();
-        LocalDateTime ldt = LocalDateTime.of(ld, st);
-        ZonedDateTime systemTime = ldt.atZone(ZoneId.systemDefault());
-        ZonedDateTime utc = systemTime.withZoneSameInstant(ZoneId.of("UTC"));
-        LocalDateTime localOut = utc.toLocalDateTime();
-        String utcOut = localOut.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDate startDate = startDateDatePicker.getValue();
+        LocalTime startTime = startTimeComboBox.getValue();
+        String utcStart = loginTime.convertToUtc(startDate, startTime);
+        LocalDate endDate = endDateDatePicker.getValue();
+        LocalTime endTime = endTimeComboBox.getValue();
+        String utcEnd = loginTime.convertToUtc(endDate, endTime);
+        String title = appointmentTitleTextField.getText();
+        String description = appointmentDescriptionTextField.getText();
+        String location = appointmentLocationTextField.getText();
+        int contactId = Integer.parseInt(String.valueOf(contactComboBox.getValue()));
+        int customerId = Integer.parseInt(String.valueOf(appointmentsCustomerIdComboBox.getValue()));
+        String type = typeTextField.getText();
+        int userId = Integer.parseInt(String.valueOf(appointmentUserIdComboBox.getValue()));
+        LocalDateTime startDateTime = LocalDateTime.of(startDate, startTime);
+        LocalDateTime endDateTime = LocalDateTime.of(endDate, endTime);
 
-        appointmentsQuery.updateAppointment(id, utcOut);
+        if (appointmentIdTextField.getText() != null && title != null && description != null && location != null && contactComboBox.getValue() != null && appointmentsCustomerIdComboBox.getValue() != null && type != null && endTime != null && startDate != null && startTime != null && appointmentUserIdComboBox.getValue() != null) {
+            if(loginTime.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
+
+            } else {
+                //ALERT appointments overlap
+            }
+        } else {
+            //ALERT
+        }
+
+        appointmentsQuery.updateAppointment(id, utcStart);
         appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
     }
 
