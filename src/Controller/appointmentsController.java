@@ -124,7 +124,12 @@ public class appointmentsController implements Initializable {
 
         if (appointmentIdTextField.getText() != null && title != null && description != null && location != null && contactComboBox.getValue() != null && appointmentsCustomerIdComboBox.getValue() != null && type != null && endTime != null && startDate != null && startTime != null && appointmentUserIdComboBox.getValue() != null) {
             if(loginTime.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
-
+                int i = appointmentsQuery.updateAppointment();
+                if (i > 0) {
+                    //Alert Success
+                } else {
+                    //Alert Failure
+                }
             } else {
                 //ALERT appointments overlap
             }

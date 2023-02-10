@@ -52,7 +52,11 @@ public class loginTime {
         customerAppointments = appointmentsQuery.getAppointmentsByCustomerId(customerId);
         for (Appointment a: customerAppointments) {
             if(a.getAppointmentId() != appointmentId) {
-                if () {
+                LocalDateTime dbStart = a.getStartDateTime();
+                LocalDateTime dbEnd = a.getEndDateTime();
+                if ((startDateTime.isAfter(dbStart) || startDateTime.isEqual(dbStart) && (startDateTime.isBefore(dbEnd))) ||
+                        (endDateTime.isAfter(dbStart) && (endDateTime.isBefore(dbEnd) || endDateTime.isEqual(dbEnd))) ||
+                        ((startDateTime.isBefore(dbStart) || startDateTime.isEqual(dbStart)) && (endDateTime.isAfter(dbEnd) || endDateTime.isEqual(dbEnd)))) {
                     overlap = true;
                 }
             }
