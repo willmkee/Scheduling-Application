@@ -39,7 +39,6 @@ public class addAppointmentController implements Initializable {
     public Label addContactLabel;
     public ComboBox<Contact> addContactComboBox;
     public Label addAppointmentCustomerIdLabel;
-    public TextField addAppointmentCustomerIdTextField;
     public Label addAppointmentTypeLabel;
     public TextField addAppointmentTypeTextField;
     public Label addAppointmentStartDateLabel;
@@ -49,7 +48,6 @@ public class addAppointmentController implements Initializable {
     public Label addAppointmentEndTimeLabel;
     public ComboBox<LocalTime> addAppointmentEndTimeComboBox;
     public Label addAppointmentUserIdLabel;
-    public TextField addAppointmentUserIdTextField;
     public Button saveAppointmentButton;
     public Button cancelButton;
     public Label addAppointmentStartTimeLabel;
