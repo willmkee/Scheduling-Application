@@ -8,7 +8,7 @@ import Model.Appointment;
 import Model.Contact;
 import Model.Customer;
 import Model.User;
-import Time.loginTime;
+import Time.Time;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,9 +26,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -105,14 +103,25 @@ public class appointmentsController implements Initializable {
     }
 
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
-        if (appointmentTitleTextField.getText().length() > 0 && appointmentIdTextField.getText().length() > 0 && appointmentDescriptionTextField.getText().length() >0 && appointmentLocationTextField.getText().length() > 0 && contactComboBox.getValue() != null && appointmentsCustomerIdComboBox.getValue() != null && typeTextField.getText().length() > 0 && endTimeComboBox.getValue() != null && startDateDatePicker != null && startTimeComboBox.getValue() != null && appointmentUserIdComboBox.getValue() != null) {
+        if (appointmentIdTextField.getText().length() > 0 &&
+                appointmentTitleTextField.getText().length() > 0 &&
+                appointmentDescriptionTextField.getText().length() > 0 &&
+                appointmentLocationTextField.getText().length() > 0 &&
+                contactComboBox.getValue() != null &&
+                appointmentsCustomerIdComboBox.getValue() != null &&
+                typeTextField.getText().length() > 0 &&
+                endTimeComboBox.getValue() != null &&
+                endDateDatePicker.getValue() != null &&
+                startDateDatePicker.getValue() != null &&
+                startTimeComboBox.getValue() != null &&
+                appointmentUserIdComboBox.getValue() != null) {
             int id = Integer.parseInt(appointmentIdTextField.getText());
             LocalDate startDate = startDateDatePicker.getValue();
             LocalTime startTime = startTimeComboBox.getValue();
-            String utcStart = loginTime.convertToUtc(startDate, startTime);
+            String utcStart = Time.convertToUtc(startDate, startTime);
             LocalDate endDate = endDateDatePicker.getValue();
             LocalTime endTime = endTimeComboBox.getValue();
-            String utcEnd = loginTime.convertToUtc(endDate, endTime);
+            String utcEnd = Time.convertToUtc(endDate, endTime);
             String title = appointmentTitleTextField.getText();
             String description = appointmentDescriptionTextField.getText();
             String location = appointmentLocationTextField.getText();
@@ -130,7 +139,7 @@ public class appointmentsController implements Initializable {
 
                 alert.showAndWait();
             }
-            else if(!loginTime.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
+            else if(!Time.appointmentUpdateOverlap(id, customerId, startDateTime, endDateTime)){
                 int i = appointmentsQuery.updateAppointment(id, utcStart, utcEnd, title, description, location, contactId, customerId, userId, type);
                 if (i > 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

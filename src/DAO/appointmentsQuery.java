@@ -79,4 +79,12 @@ public class appointmentsQuery {
         }
         return customerAppointments;
     }
+
+    public static int addNewAppointment(String start, String end, String title, String description, String location, int contactId, int customerId, int userId, String type) throws SQLException {
+        String sql = "INSERT INTO client_schedule.appointments (Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID)\n" +
+                "VALUES (\"" + title + "\", \"" + description + "\", \"" + location + "\", \"" + type + "\", \"" + start + "\", \"" + end + "\", NOW(), 'script', NOW(), 'script', \"" + customerId + "\", \"" + userId + "\", \"" + contactId + "\");";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        int rs = ps.executeUpdate();
+        return rs;
+    }
 }

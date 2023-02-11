@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Appointment;
-import Time.loginTime;
+import Time.Time;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +43,7 @@ public class loginFormController implements Initializable {
 
         ResourceBundle rb = ResourceBundle.getBundle("language/lang", Locale.getDefault());
         if (validUser != -1) {
-            upcomingAppointments = loginTime.viewUpcomingAppointments();
+            upcomingAppointments = Time.viewUpcomingAppointments();
             if(upcomingAppointments.size() > 0) {
                 Appointment appointment = upcomingAppointments.get(0);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

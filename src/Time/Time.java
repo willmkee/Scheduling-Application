@@ -11,7 +11,7 @@ import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class loginTime {
+public class Time {
 
     public static ZonedDateTime currentTime;
     public static ZonedDateTime fifteenMinutesPast;
@@ -54,12 +54,28 @@ public class loginTime {
             if(a.getAppointmentId() != appointmentId) {
                 LocalDateTime dbStart = a.getStartDateTime();
                 LocalDateTime dbEnd = a.getEndDateTime();
-                if ((startDateTime.isAfter(dbStart) || startDateTime.isEqual(dbStart) && (startDateTime.isBefore(dbEnd))) ||
+                if (((startDateTime.isAfter(dbStart) || startDateTime.isEqual(dbStart)) && startDateTime.isBefore(dbEnd)) ||
                         (endDateTime.isAfter(dbStart) && (endDateTime.isBefore(dbEnd) || endDateTime.isEqual(dbEnd))) ||
                         ((startDateTime.isBefore(dbStart) || startDateTime.isEqual(dbStart)) && (endDateTime.isAfter(dbEnd) || endDateTime.isEqual(dbEnd)))) {
                     overlap = true;
                 }
             }
+        }
+        return overlap;
+    }
+
+    public static boolean addAppointmentOverlap(int customerId, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
+        boolean overlap = false;
+        ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
+        customerAppointments = appointmentsQuery.getAppointmentsByCustomerId(customerId);
+        for (Appointment a: customerAppointments) {
+                LocalDateTime dbStart = a.getStartDateTime();
+                LocalDateTime dbEnd = a.getEndDateTime();
+                if (((startDateTime.isAfter(dbStart) || startDateTime.isEqual(dbStart)) && startDateTime.isBefore(dbEnd)) ||
+                        (endDateTime.isAfter(dbStart) && (endDateTime.isBefore(dbEnd) || endDateTime.isEqual(dbEnd))) ||
+                        ((startDateTime.isBefore(dbStart) || startDateTime.isEqual(dbStart)) && (endDateTime.isAfter(dbEnd) || endDateTime.isEqual(dbEnd)))) {
+                    overlap = true;
+                }
         }
         return overlap;
     }
