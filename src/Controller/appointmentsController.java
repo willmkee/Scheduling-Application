@@ -84,22 +84,20 @@ public class appointmentsController implements Initializable {
 
     public void onAllAppointments(ActionEvent actionEvent) throws SQLException {
         appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
-        appointmentTableCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
-        titleTableCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        descriptionTableCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        locationTableCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactTableCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
-        typeTableCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        endDatetimeTableCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
-        customerIDTableCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        userIdTableCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
-    public void onAppointmentsByWeek(ActionEvent actionEvent) {
+    public void onAppointmentsByWeek(ActionEvent actionEvent) throws SQLException {
+        String currentTimeUtc = Time.convertToUtc(LocalDate.now(), LocalTime.now());
+        String nextWeekUtc = Time.convertToUtc(LocalDate.now().plusDays(7), LocalTime.now());
+        ObservableList<Appointment> currentWeekAppointments = appointmentsQuery.displayCurrentWeek(currentTimeUtc, nextWeekUtc);
+        appointmentsTableView.setItems(currentWeekAppointments);
     }
 
-    public void onAppointmentsByMonth(ActionEvent actionEvent) {
+    public void onAppointmentsByMonth(ActionEvent actionEvent) throws SQLException {
+        String currentTimeUtc = Time.convertToUtc(LocalDate.now(), LocalTime.now());
+        String nextWeekUtc = Time.convertToUtc(LocalDate.now().plusMonths(1), LocalTime.now());
+        ObservableList<Appointment> currentWeekAppointments = appointmentsQuery.displayCurrentWeek(currentTimeUtc, nextWeekUtc);
+        appointmentsTableView.setItems(currentWeekAppointments);
     }
 
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
@@ -148,7 +146,8 @@ public class appointmentsController implements Initializable {
                     alert.setContentText("Appointment successfully updated!");
 
                     alert.showAndWait();
-                    appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+                    allAppointmentsRadioButton.fire();
+                    allAppointmentsRadioButton.fireEvent(actionEvent);
                     appointmentIdTextField.setText("");
                     appointmentTitleTextField.setText("");
                     appointmentDescriptionTextField.setText("");
@@ -186,7 +185,8 @@ public class appointmentsController implements Initializable {
 
             alert.showAndWait();
         }
-        appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+        allAppointmentsRadioButton.fire();
+        allAppointmentsRadioButton.fireEvent(actionEvent);
     }
 
     public void onDeleteAppointment(ActionEvent actionEvent) throws SQLException {
@@ -221,7 +221,9 @@ public class appointmentsController implements Initializable {
                         typeTextField.setText(null);
                         startDateDatePicker.setValue(null);
                         endDateDatePicker.setValue(null);
-                        appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+                        //appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
+                        allAppointmentsRadioButton.fire();
+                        allAppointmentsRadioButton.fireEvent(actionEvent);
 
 
 

@@ -87,4 +87,29 @@ public class appointmentsQuery {
         int rs = ps.executeUpdate();
         return rs;
     }
+
+    public static ObservableList<Appointment> displayCurrentWeek(String currentTimeUtc, String nextWeekUtc) throws SQLException {
+        ObservableList<Appointment> currentWeekAppointments = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM client_schedule.appointments WHERE Start BETWEEN \"" + currentTimeUtc + "\" AND \"" +nextWeekUtc + "\";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int appointmentId = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            Timestamp startTime = rs.getTimestamp("Start");
+            LocalDateTime startDateTime = startTime.toLocalDateTime();
+            Timestamp endTime = rs.getTimestamp("End");
+            LocalDateTime endDateTime = endTime.toLocalDateTime();
+            int customerId = rs.getInt("Customer_ID");
+            int userId = rs.getInt("User_ID");
+            int contactId = rs.getInt("Contact_ID");
+            Appointment appointment = new Appointment(appointmentId, title, description, location, type, startDateTime, endDateTime,customerId, userId, contactId);
+            currentWeekAppointments.add(appointment);
+        }
+
+        return currentWeekAppointments;
+    }
 }
