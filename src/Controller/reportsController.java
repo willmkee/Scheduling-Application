@@ -130,5 +130,7 @@ public class reportsController implements Initializable {
 
         });
 
+        //Fill last report here
+
     }
 }
