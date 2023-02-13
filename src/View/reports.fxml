@@ -35,19 +35,12 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+                        <HBox prefHeight="100.0" prefWidth="240.0" spacing="40.0">
                            <children>
-                              <TableView fx:id="appointmentsByTypeTableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0">
-                                <columns>
-                                  <TableColumn fx:id="appointmentsByTypeTypeCol" minWidth="190.0" prefWidth="75.0" text="Type" />
-                                  <TableColumn fx:id="appointmentsByTypeTotalCol" minWidth="190.0" prefWidth="190.0" text="Total" />
-                                </columns>
-                              </TableView>
-                              <TableView fx:id="appointmentsByMonthTableView" minWidth="-Infinity" prefHeight="200.0" prefWidth="380.0">
-                                <columns>
-                                  <TableColumn fx:id="appointmentsByMonthMonthCol" minWidth="190.0" prefWidth="75.0" text="Month" />
-                                  <TableColumn fx:id="appointmentsByMonthTotalCol" minWidth="190.0" prefWidth="75.0" text="Total" />
-                                </columns>
+                              <TableView fx:id="appointmentsByTypeTableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="220.0">
+                                 <HBox.margin>
+                                    <Insets left="310.0" />
+                                 </HBox.margin>
                               </TableView>
                            </children>
                         </HBox>

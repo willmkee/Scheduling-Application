@@ -2,13 +2,15 @@ package DAO;
 
 import Model.Appointment;
 import helper.JDBC;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TreeTableColumn;
+import javafx.util.Callback;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.*;
 
 public class appointmentsQuery {
@@ -111,5 +113,30 @@ public class appointmentsQuery {
         }
 
         return currentWeekAppointments;
+    }
+
+    public static ObservableList<Appointment> getAppointmentsbyContact(int contactId) throws SQLException {
+        ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM client_schedule.appointments WHERE Contact_ID=" + contactId + ";";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        final ZoneId localZone = ZoneId.systemDefault();
+        while(rs.next()) {
+            int appointmentId = rs.getInt("Appointment_ID");
+            String title = rs.getString("Title");
+            String description = rs.getString("Description");
+            String location = rs.getString("Location");
+            String type = rs.getString("Type");
+            Timestamp startTime = rs.getTimestamp("Start");
+            LocalDateTime startDateTime = startTime.toLocalDateTime();
+            Timestamp endTime = rs.getTimestamp("End");
+            LocalDateTime endDateTime = endTime.toLocalDateTime();
+            int customerId = rs.getInt("Customer_ID");
+            int userId = rs.getInt("User_ID");
+            Appointment appointment = new Appointment(appointmentId, title, description, location, type, startDateTime, endDateTime,customerId, userId, contactId);
+            allAppointments.add(appointment);
+        }
+
+        return allAppointments;
     }
 }
