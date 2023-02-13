@@ -88,7 +88,6 @@ public class reportsController implements Initializable {
                 });
 
                 appointmentsByTypeTableView.getColumns().addAll(col);
-                System.out.println("Column [" + i + "] ");
             }
 
             while (rs.next()) {
@@ -98,7 +97,6 @@ public class reportsController implements Initializable {
                     //Iterate Column
                     row.add(rs.getString(i));
                 }
-                System.out.println("Row [1] added " + row);
                 data.add(row);
             }
             //FINALLY ADDED TO TableView
