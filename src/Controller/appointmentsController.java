@@ -13,6 +13,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -87,17 +88,29 @@ public class appointmentsController implements Initializable {
     }
 
     public void onAppointmentsByWeek(ActionEvent actionEvent) throws SQLException {
-        String currentTimeUtc = Time.convertToUtc(LocalDate.now(), LocalTime.now());
-        String nextWeekUtc = Time.convertToUtc(LocalDate.now().plusDays(7), LocalTime.now());
-        ObservableList<Appointment> currentWeekAppointments = appointmentsQuery.displayCurrentWeek(currentTimeUtc, nextWeekUtc);
-        appointmentsTableView.setItems(currentWeekAppointments);
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nowPlus7 = now.plusDays(7);
+        FilteredList<Appointment> filteredData = new FilteredList<>(appointmentsQuery.getAllAppointments());
+        filteredData.setPredicate(row -> {
+
+            LocalDateTime rowDate = row.getStartDateTime();
+
+            return rowDate.isAfter(now) && rowDate.isBefore(nowPlus7);
+        });
+        appointmentsTableView.setItems(filteredData);
     }
 
     public void onAppointmentsByMonth(ActionEvent actionEvent) throws SQLException {
-        String currentTimeUtc = Time.convertToUtc(LocalDate.now(), LocalTime.now());
-        String nextWeekUtc = Time.convertToUtc(LocalDate.now().plusMonths(1), LocalTime.now());
-        ObservableList<Appointment> currentWeekAppointments = appointmentsQuery.displayCurrentWeek(currentTimeUtc, nextWeekUtc);
-        appointmentsTableView.setItems(currentWeekAppointments);
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nowPlusMonth = now.plusMonths(1);
+        FilteredList<Appointment> filteredData = new FilteredList<>(appointmentsQuery.getAllAppointments());
+        filteredData.setPredicate(row -> {
+
+            LocalDateTime rowDate = row.getStartDateTime();
+
+            return rowDate.isAfter(now) && rowDate.isBefore(nowPlusMonth);
+        });
+        appointmentsTableView.setItems(filteredData);
     }
 
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
