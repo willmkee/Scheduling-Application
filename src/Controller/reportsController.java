@@ -117,7 +117,7 @@ public class reportsController implements Initializable {
                     appointmentsByContactAppointmentIdCol.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
                     appByContactTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
                     appByContactDescriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-                    appByLocationLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+                    //appByLocationLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
                     appByContactTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
                     appByContactStartDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
                     appByContactEndDateTimeCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
@@ -130,7 +130,45 @@ public class reportsController implements Initializable {
 
         });
 
-        //Fill last report here
+        Connection d;
+        ObservableList<ObservableList> customerdata = FXCollections.observableArrayList();
+        try {
+            d = JDBC.getConnection();
+            //SQL FOR SELECTING ALL OF CUSTOMER
+            String SQL = "SELECT client_schedule.customers.Customer_Name, COUNT(*) as \"Total Appointments\" FROM client_schedule.appointments\n" +
+                    "INNER JOIN client_schedule.customers ON client_schedule.appointments.Customer_ID=client_schedule.customers.Customer_ID\n" +
+                    "GROUP BY client_schedule.customers.Customer_Name;";
+            //ResultSet
+            ResultSet customerRs = d.createStatement().executeQuery(SQL);
+
+            for (int i = 0; i < customerRs.getMetaData().getColumnCount(); i++) {
+                //We are using non property style for making dynamic table
+                final int j = i;
+                TableColumn col = new TableColumn(customerRs.getMetaData().getColumnName(i + 1));
+                col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                    public ObservableValue<String> call(TableColumn.CellDataFeatures<ObservableList, String> param) {
+                        return new SimpleStringProperty(param.getValue().get(j).toString());
+                    }
+                });
+
+                appByLocationTableView.getColumns().addAll(col);
+            }
+
+            while (customerRs.next()) {
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= customerRs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    row.add(customerRs.getString(i));
+                }
+                customerdata.add(row);
+            }
+            //FINALLY ADDED TO TableView
+            appByLocationTableView.setItems(customerdata);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error on Building Data");
+        }
 
     }
 }
