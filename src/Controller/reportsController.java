@@ -29,27 +29,93 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The type Reports controller.
+ */
 public class reportsController implements Initializable {
+    /**
+     * The Reports title label.
+     */
     public Label reportsTitleLabel;
+    /**
+     * The Reports back button.
+     */
     public Button reportsBackButton;
+    /**
+     * The Type and month title label.
+     */
     public Label typeAndMonthTitleLabel;
+    /**
+     * The Appointments by type table view.
+     */
     public TableView appointmentsByTypeTableView;
+    /**
+     * The Appointments by contact title label.
+     */
     public Label appointmentsByContactTitleLabel;
+    /**
+     * The Contact combo box label.
+     */
     public Label contactComboBoxLabel;
+    /**
+     * The Reports contact combo box.
+     */
     public ComboBox<Contact> reportsContactComboBox;
+    /**
+     * The Appointments by contact table view.
+     */
     public TableView appointmentsByContactTableView;
+    /**
+     * The Appointments by contact appointment id col.
+     */
     public TableColumn appointmentsByContactAppointmentIdCol;
+    /**
+     * The App by contact title col.
+     */
     public TableColumn appByContactTitleCol;
+    /**
+     * The App by contact type col.
+     */
     public TableColumn appByContactTypeCol;
+    /**
+     * The App by contact description col.
+     */
     public TableColumn appByContactDescriptionCol;
+    /**
+     * The App by contact start date time col.
+     */
     public TableColumn appByContactStartDateTimeCol;
+    /**
+     * The App by contact end date time col.
+     */
     public TableColumn appByContactEndDateTimeCol;
+    /**
+     * The App by contact customer id col.
+     */
     public TableColumn appByContactCustomerIdCol;
+    /**
+     * The App by location title label.
+     */
     public Label appByLocationTitleLabel;
+    /**
+     * The App by location table view.
+     */
     public TableView appByLocationTableView;
+    /**
+     * The App by location location col.
+     */
     public TableColumn appByLocationLocationCol;
+    /**
+     * The App by location total col.
+     */
     public TableColumn appByLocationTotalCol;
 
+    /**
+     * On back button.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onBackButton(ActionEvent actionEvent) throws IOException {
         Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -58,6 +124,11 @@ public class reportsController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Initializes combobox and Report tables
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
