@@ -71,8 +71,8 @@ public class customerQuery {
     public static int deleteCustomerById(int deletedId) throws SQLException {
         String sql = "DELETE FROM client_schedule.customers WHERE customers.Customer_ID=" + deletedId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        int results = ps.executeUpdate();
-        return results;
+        int result = ps.executeUpdate();
+        return result;
     }
 
     public static int addNewCustomer(String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {

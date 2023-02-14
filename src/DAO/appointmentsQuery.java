@@ -47,9 +47,11 @@ public class appointmentsQuery {
         return rs;
     }
 
-    public static void deleteAppointmentsByCustomerId(int customerId) throws SQLException {
+    public static int deleteAppointmentsByCustomerId(int customerId) throws SQLException {
         String sql = "DELETE FROM client_schedule.appointments WHERE Customer_ID=" + customerId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        int rs = ps.executeUpdate();
+        return rs;
     }
 
     public static int updateAppointment(int appointmentId, String start, String end, String title, String description, String location, int contactId, int customerId, int userId, String type) throws SQLException {

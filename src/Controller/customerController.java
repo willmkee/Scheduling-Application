@@ -113,9 +113,10 @@ public class customerController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                if (customerIdTextField.getText() != null) {
+                if (customerIdTextField.getText().length() > 0) {
                     appointmentsQuery.deleteAppointmentsByCustomerId(deletedId);
-                    if (customerQuery.deleteCustomerById(deletedId) > 0){
+                    int deletedCustomers = customerQuery.deleteCustomerById(deletedId);
+                    if (deletedCustomers > 0){
                         Alert customerDeletedAlert = new Alert(Alert.AlertType.INFORMATION);
                         customerDeletedAlert.setTitle("Customer Deleted");
                         customerDeletedAlert.setHeaderText("Success!");
@@ -172,7 +173,7 @@ public class customerController implements Initializable {
             countryComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
                 if (newValue == null) {
                     stateProvinceComboBox.getItems().clear();
-                    stateProvinceComboBox.setDisable(true);
+                    //stateProvinceComboBox.setDisable(true);
                 }
                 else {
                     try {
