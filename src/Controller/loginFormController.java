@@ -15,9 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Locale;
 import java.util.Objects;
@@ -38,6 +42,9 @@ public class loginFormController implements Initializable {
     public void onLogin(ActionEvent actionEvent) throws IOException, SQLException {
         String userName = loginUsernameTextField.getText();
         String password = loginPasswordTextField.getText();
+        String fileName = "login_activity.txt";
+        FileWriter loginLog = new FileWriter(fileName, true);
+        PrintWriter logOutput = new PrintWriter(loginLog);
         int validUser = passwordVerification(userName, password);
         ObservableList<Appointment> upcomingAppointments;
 
@@ -67,6 +74,8 @@ public class loginFormController implements Initializable {
             Scene scene = new Scene(directory);
             stage.setScene(scene);
             stage.show();
+
+            logOutput.print(userName + " successfully logged in at: " + Timestamp.valueOf(LocalDateTime.now()) + "\n");
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -75,7 +84,9 @@ public class loginFormController implements Initializable {
             alert.setContentText(rb.getString("invalid"));
 
             alert.showAndWait();
+            logOutput.print(userName + " failed login attempt at: " + Timestamp.valueOf(LocalDateTime.now()) + "\n");
         }
+        logOutput.close();
     }
 
     public void onExit(ActionEvent actionEvent) {
