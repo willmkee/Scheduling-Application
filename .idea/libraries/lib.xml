@@ -2,12 +2,13 @@
   <library name="lib">
     <CLASSES>
       <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-8.0.25/mysql-connector-java-8.0.25.jar!/" />
-      <root url="file://$USER_HOME$/Desktop/javafx-sdk-19.0.2.1/lib" />
-      <root url="file://$USER_HOME$/Desktop/javafx-sdk-17.0.1/lib" />
+      <root url="file://$PATH_TO_FX$" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
-    <jarDirectory url="file://$USER_HOME$/Desktop/javafx-sdk-17.0.1/lib" recursive="false" />
-    <jarDirectory url="file://$USER_HOME$/Desktop/javafx-sdk-19.0.2.1/lib" recursive="false" />
+    <SOURCES>
+      <root url="file://$PATH_TO_FX$" />
+    </SOURCES>
+    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" />
+    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" type="SOURCES" />
   </library>
 </component>
