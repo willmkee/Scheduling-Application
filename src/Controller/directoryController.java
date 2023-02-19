@@ -46,7 +46,8 @@ public class directoryController {
     public Label directoryLabel;
 
     /**
-     * On view update.
+     * On view or update customer.
+     * Opens customer screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -61,6 +62,7 @@ public class directoryController {
 
     /**
      * On add customer.
+     * Opens add customer screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -75,6 +77,7 @@ public class directoryController {
 
     /**
      * On view update appointments.
+     * Opens appointments screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -89,6 +92,7 @@ public class directoryController {
 
     /**
      * On add appointment.
+     * Opens add appointment screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -103,6 +107,7 @@ public class directoryController {
 
     /**
      * On view reports.
+     * Opens reports screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -117,6 +122,7 @@ public class directoryController {
 
     /**
      * On exit.
+     * Closes out of the application
      *
      * @param actionEvent the action event
      */

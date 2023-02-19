@@ -31,87 +31,87 @@ import java.util.ResourceBundle;
  */
 public class addAppointmentController implements Initializable {
     /**
-     * The Add appointment label.
+     * The Title Label.
      */
     public Label addAppointmentLabel;
     /**
-     * The Add appointment id label.
+     * The appointment id label.
      */
     public Label addAppointmentIdLabel;
     /**
-     * The Add appointment id text field.
+     * The appointment id text field.
      */
     public TextField addAppointmentIdTextField;
     /**
-     * The Add appointment title label.
+     * The appointment title label.
      */
     public Label addAppointmentTitleLabel;
     /**
-     * The Add appointment title text field.
+     * The appointment title text field.
      */
     public TextField addAppointmentTitleTextField;
     /**
-     * The Add appointment description label.
+     * The appointment description label.
      */
     public Label addAppointmentDescriptionLabel;
     /**
-     * The Add appointment description text field.
+     * The appointment description text field.
      */
     public TextField addAppointmentDescriptionTextField;
     /**
-     * The Add appointment location label.
+     * The appointment location label.
      */
     public Label addAppointmentLocationLabel;
     /**
-     * The Add appointment location text field.
+     * The appointment location text field.
      */
     public TextField addAppointmentLocationTextField;
     /**
-     * The Add contact label.
+     * The contact label.
      */
     public Label addContactLabel;
     /**
-     * The Add contact combo box.
+     * The contact combo box.
      */
     public ComboBox<Contact> addContactComboBox;
     /**
-     * The Add appointment customer id label.
+     * The customer id label.
      */
     public Label addAppointmentCustomerIdLabel;
     /**
-     * The Add appointment type label.
+     * The appointment type label.
      */
     public Label addAppointmentTypeLabel;
     /**
-     * The Add appointment type text field.
+     * The appointment type text field.
      */
     public TextField addAppointmentTypeTextField;
     /**
-     * The Add appointment start date label.
+     * The appointment start date label.
      */
     public Label addAppointmentStartDateLabel;
     /**
-     * The Add appointment start date date picker.
+     * The appointment start date date picker.
      */
     public DatePicker addAppointmentStartDateDatePicker;
     /**
-     * The Add appointment end date label.
+     * The appointment end date label.
      */
     public Label addAppointmentEndDateLabel;
     /**
-     * The Add appointment end date date picker.
+     * The appointment end date date picker.
      */
     public DatePicker addAppointmentEndDateDatePicker;
     /**
-     * The Add appointment end time label.
+     * The appointment end time label.
      */
     public Label addAppointmentEndTimeLabel;
     /**
-     * The Add appointment end time combo box.
+     * The appointment end time combo box.
      */
     public ComboBox<LocalTime> addAppointmentEndTimeComboBox;
     /**
-     * The Add appointment user id label.
+     * The user id label.
      */
     public Label addAppointmentUserIdLabel;
     /**
@@ -123,11 +123,11 @@ public class addAppointmentController implements Initializable {
      */
     public Button cancelButton;
     /**
-     * The Add appointment start time label.
+     * The appointment start time label.
      */
     public Label addAppointmentStartTimeLabel;
     /**
-     * The Add appointment start time combo box.
+     * The appointment start time combo box.
      */
     public ComboBox<LocalTime> addAppointmentStartTimeComboBox;
     /**
@@ -141,6 +141,7 @@ public class addAppointmentController implements Initializable {
 
     /**
      * On save appointment.
+     * Creates new appointment if all fields are filled in
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -215,6 +216,7 @@ public class addAppointmentController implements Initializable {
 
     /**
      * On cancel.
+     * Returns to directory view
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -228,6 +230,8 @@ public class addAppointmentController implements Initializable {
     }
 
     /**
+     * Initialize
+     * Initializes combo boxes
      *
      * @param url
      * @param resourceBundle

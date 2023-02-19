@@ -95,6 +95,7 @@ public class addCustomerController implements Initializable {
 
     /**
      * On add save changes.
+     * Creates new customer if all fields are filled in
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -137,6 +138,7 @@ public class addCustomerController implements Initializable {
 
     /**
      * On cancel.
+     * Returns to directory screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -150,6 +152,13 @@ public class addCustomerController implements Initializable {
     }
 
     /**
+     * Initializes combo boxes
+     *
+     * Lambda function is used in order to fill the state and province
+     * comboboxes with the appropriate countries states or provinces.
+     * Lamda is uses to create a listener that keeps track of which country
+     * is selected in the country combobox in order to update the state/province combobox
+     *
      *
      * @param url
      * @param resourceBundle

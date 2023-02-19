@@ -68,6 +68,9 @@ public class loginFormController implements Initializable {
 
     /**
      * On login.
+     * Logs into app
+     * Keeps a log of login attempts
+     * Notifies user of upcoming appointments.
      *
      * @param actionEvent the action event
      * @throws IOException  the io exception
@@ -125,6 +128,7 @@ public class loginFormController implements Initializable {
 
     /**
      * On exit.
+     * Closes application
      *
      * @param actionEvent the action event
      */
@@ -134,7 +138,7 @@ public class loginFormController implements Initializable {
     }
 
     /**
-     *
+     * Initializes language settings.
      * @param url
      * @param resourceBundle
      */

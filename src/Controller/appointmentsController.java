@@ -226,6 +226,7 @@ public class appointmentsController implements Initializable {
 
     /**
      * On all appointments.
+     * Displays all appointments in table
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -236,6 +237,11 @@ public class appointmentsController implements Initializable {
 
     /**
      * On appointments by week.
+     * Displays appointments for the upcoming week in table.
+     *
+     * Lambda function is used in lieu of doing a separate sql query.
+     * Lambda function uses the getAllAppointments() method and then fills each row based on start time.
+     *
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -255,6 +261,8 @@ public class appointmentsController implements Initializable {
 
     /**
      * On appointments by month.
+     * Shows appointments for the upcoming month in the appointments table.
+     *
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -274,6 +282,8 @@ public class appointmentsController implements Initializable {
 
     /**
      * On update appointment.
+     * If all fields are filled in and appointment times do not overlap this will update the selected appointment.
+     *
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -369,6 +379,7 @@ public class appointmentsController implements Initializable {
 
     /**
      * On delete appointment.
+     * Deletes selected appointment
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -426,6 +437,7 @@ public class appointmentsController implements Initializable {
 
     /**
      * On add appointment.
+     * Opens the add appointment screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -440,6 +452,7 @@ public class appointmentsController implements Initializable {
 
     /**
      * On main menu.
+     * Returns to the directory screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -453,7 +466,7 @@ public class appointmentsController implements Initializable {
     }
 
     /**
-     *
+     * Initializes the appointment table and comboboxes
      * @param url
      * @param resourceBundle
      */

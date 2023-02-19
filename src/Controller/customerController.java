@@ -142,6 +142,7 @@ public class customerController implements Initializable {
 
     /**
      * On save changes.
+     * Updates selected customer
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -186,6 +187,7 @@ public class customerController implements Initializable {
 
     /**
      * On add new customer.
+     * Opens the add customer screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -200,6 +202,7 @@ public class customerController implements Initializable {
 
     /**
      * On delete customer.
+     * Deletes customer and associated appointments
      *
      * @param actionEvent the action event
      * @throws SQLException the sql exception
@@ -247,6 +250,7 @@ public class customerController implements Initializable {
 
     /**
      * On back.
+     * Returns to the directory screen.
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
@@ -260,6 +264,8 @@ public class customerController implements Initializable {
     }
 
     /**
+     * Initializes the customer table and comboboxes
+     *
      *
      * @param url
      * @param resourceBundle

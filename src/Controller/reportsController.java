@@ -112,6 +112,7 @@ public class reportsController implements Initializable {
 
     /**
      * On back button.
+     * Returns to directory screen
      *
      * @param actionEvent the action event
      * @throws IOException the io exception
