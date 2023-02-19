@@ -20,25 +20,86 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The type Add customer controller.
+ */
 public class addCustomerController implements Initializable {
+    /**
+     * The Add customer label.
+     */
     public Label addCustomerLabel;
+    /**
+     * The Add customer id label.
+     */
     public Label addCustomerIdLabel;
+    /**
+     * The Add customer id text field.
+     */
     public TextField addCustomerIdTextField;
+    /**
+     * The Add customer name label.
+     */
     public Label addCustomerNameLabel;
+    /**
+     * The Add customer name text field.
+     */
     public TextField addCustomerNameTextField;
+    /**
+     * The Add address label.
+     */
     public Label addAddressLabel;
+    /**
+     * The Add address text field.
+     */
     public TextField addAddressTextField;
+    /**
+     * The Add postal code label.
+     */
     public Label addPostalCodeLabel;
+    /**
+     * The Add postal code text field.
+     */
     public TextField addPostalCodeTextField;
+    /**
+     * The Add phone number label.
+     */
     public Label addPhoneNumberLabel;
+    /**
+     * The Add phone number text field.
+     */
     public TextField addPhoneNumberTextField;
+    /**
+     * The Add country label.
+     */
     public Label addCountryLabel;
+    /**
+     * The Add country combo box.
+     */
     public ComboBox<Country> addCountryComboBox;
+    /**
+     * The Add state province label.
+     */
     public Label addStateProvinceLabel;
+    /**
+     * The Add state province combo box.
+     */
     public ComboBox<FirstLevelDivision> addStateProvinceComboBox;
+    /**
+     * The Add save changes button.
+     */
     public Button addSaveChangesButton;
+    /**
+     * The Cancel button.
+     */
     public Button cancelButton;
 
+    /**
+     * On add save changes.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public void onAddSaveChanges(ActionEvent actionEvent) throws SQLException, IOException {
         if((addCustomerNameTextField.getText().length() > 0) && (addAddressTextField.getText().length() > 0) && (addPostalCodeTextField.getText().length() > 0) && (addPhoneNumberTextField.getText().length() > 0) && (addCountryComboBox.getValue() != null) && (addStateProvinceComboBox != null)) {
             String customerName = addCustomerNameTextField.getText();
@@ -74,6 +135,12 @@ public class addCustomerController implements Initializable {
         }
     }
 
+    /**
+     * On cancel.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onCancel(ActionEvent actionEvent) throws IOException {
         Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -82,6 +149,11 @@ public class addCustomerController implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

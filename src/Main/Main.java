@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * The type Main.
+ */
 public class Main extends Application {
 
     @Override
@@ -23,6 +26,11 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Main.
+     *
+     * @param args the args
+     */
     public static void main(String[] args){
         JDBC.openConnection();
         launch(args);

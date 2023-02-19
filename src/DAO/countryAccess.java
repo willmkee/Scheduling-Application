@@ -9,7 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type Country access.
+ */
 public class countryAccess {
+    /**
+     * Gets all countries.
+     *
+     * @return the all countries
+     * @throws SQLException the sql exception
+     */
     public static ObservableList<Country> getAllCountries() throws SQLException {
         ObservableList<Country> allCountries = FXCollections.observableArrayList();
         String sql = "SELECT Country_ID, Country FROM client_schedule.countries;";
@@ -25,6 +34,13 @@ public class countryAccess {
         return allCountries;
     }
 
+    /**
+     * Gets country by name.
+     *
+     * @param countryName the country name
+     * @return the country by name
+     * @throws SQLException the sql exception
+     */
     public static Country getCountryByName(String countryName) throws SQLException {
         String sql = "SELECT * FROM client_schedule.countries WHERE Country=\"" + countryName + "\";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

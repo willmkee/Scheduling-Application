@@ -32,61 +32,214 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The type Appointments controller.
+ */
 public class appointmentsController implements Initializable {
+    /**
+     * The Appointments label.
+     */
     public Label appointmentsLabel;
+    /**
+     * The Appointments table view.
+     */
     public TableView<Appointment> appointmentsTableView;
+    /**
+     * The Appointment table col.
+     */
     public TableColumn appointmentTableCol;
+    /**
+     * The Title table col.
+     */
     public TableColumn titleTableCol;
+    /**
+     * The Description table col.
+     */
     public TableColumn descriptionTableCol;
+    /**
+     * The Location table col.
+     */
     public TableColumn locationTableCol;
+    /**
+     * The Contact table col.
+     */
     public TableColumn contactTableCol;
+    /**
+     * The Type table col.
+     */
     public TableColumn typeTableCol;
+    /**
+     * The Start datetime table col.
+     */
     public TableColumn startDatetimeTableCol;
+    /**
+     * The End datetime table col.
+     */
     public TableColumn endDatetimeTableCol;
+    /**
+     * The Customer id table col.
+     */
     public TableColumn customerIDTableCol;
+    /**
+     * The User id table col.
+     */
     public TableColumn userIdTableCol;
+    /**
+     * The All appointments radio button.
+     */
     public RadioButton allAppointmentsRadioButton;
+    /**
+     * The Appointment radio buttons.
+     */
     public ToggleGroup appointmentRadioButtons;
+    /**
+     * The Appointments by week radio button.
+     */
     public RadioButton appointmentsByWeekRadioButton;
+    /**
+     * The Appointments by month radio button.
+     */
     public RadioButton appointmentsByMonthRadioButton;
+    /**
+     * The Appointment id label.
+     */
     public Label appointmentIdLabel;
+    /**
+     * The Appointment id text field.
+     */
     public TextField appointmentIdTextField;
+    /**
+     * The Appointment title label.
+     */
     public Label appointmentTitleLabel;
+    /**
+     * The Appointment title text field.
+     */
     public TextField appointmentTitleTextField;
+    /**
+     * The Appointment description label.
+     */
     public Label appointmentDescriptionLabel;
+    /**
+     * The Appointment description text field.
+     */
     public TextField appointmentDescriptionTextField;
+    /**
+     * The Appointment location label.
+     */
     public Label appointmentLocationLabel;
+    /**
+     * The Appointment location text field.
+     */
     public TextField appointmentLocationTextField;
+    /**
+     * The Contact label.
+     */
     public Label contactLabel;
+    /**
+     * The Contact combo box.
+     */
     public ComboBox<Contact> contactComboBox;
+    /**
+     * The Type label.
+     */
     public Label typeLabel;
+    /**
+     * The Type text field.
+     */
     public TextField typeTextField;
+    /**
+     * The Start date label.
+     */
     public Label startDateLabel;
+    /**
+     * The Start date date picker.
+     */
     public DatePicker startDateDatePicker;
+    /**
+     * The Start time label.
+     */
     public Label startTimeLabel;
+    /**
+     * The Start time combo box.
+     */
     public ComboBox<LocalTime> startTimeComboBox;
+    /**
+     * The End date label.
+     */
     public Label endDateLabel;
+    /**
+     * The End date date picker.
+     */
     public DatePicker endDateDatePicker;
+    /**
+     * The End time label.
+     */
     public Label endTimeLabel;
+    /**
+     * The End time combo box.
+     */
     public ComboBox<LocalTime> endTimeComboBox;
+    /**
+     * The Update appointment button.
+     */
     public Button updateAppointmentButton;
+    /**
+     * The Delete appointment button.
+     */
     public Button deleteAppointmentButton;
+    /**
+     * The Add appointment button.
+     */
     public Button addAppointmentButton;
+    /**
+     * The Main menu button.
+     */
     public Button mainMenuButton;
+    /**
+     * The Customer id label.
+     */
     public Label customerIdLabel;
+    /**
+     * The Customer id text field.
+     */
     public TextField customerIdTextField;
+    /**
+     * The User id label.
+     */
     public Label userIdLabel;
+    /**
+     * The User id text field.
+     */
     public TextField userIdTextField;
+    /**
+     * The Appointment user id combo box.
+     */
     public ComboBox<User> appointmentUserIdComboBox;
+    /**
+     * The Appointments customer id combo box.
+     */
     public ComboBox appointmentsCustomerIdComboBox;
     //public ComboBox<Customer> appointmentsCustomerIDComboBox;
     private int selectedIndex;
     private Appointment selectedAppointment;
 
+    /**
+     * On all appointments.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onAllAppointments(ActionEvent actionEvent) throws SQLException {
         appointmentsTableView.setItems(appointmentsQuery.getAllAppointments());
     }
 
+    /**
+     * On appointments by week.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onAppointmentsByWeek(ActionEvent actionEvent) throws SQLException {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nowPlus7 = now.plusDays(7);
@@ -100,6 +253,12 @@ public class appointmentsController implements Initializable {
         appointmentsTableView.setItems(filteredData);
     }
 
+    /**
+     * On appointments by month.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onAppointmentsByMonth(ActionEvent actionEvent) throws SQLException {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime nowPlusMonth = now.plusMonths(1);
@@ -113,6 +272,12 @@ public class appointmentsController implements Initializable {
         appointmentsTableView.setItems(filteredData);
     }
 
+    /**
+     * On update appointment.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onUpdateAppointment(ActionEvent actionEvent) throws SQLException {
         if (appointmentIdTextField.getText().length() > 0 &&
                 appointmentTitleTextField.getText().length() > 0 &&
@@ -202,6 +367,12 @@ public class appointmentsController implements Initializable {
         allAppointmentsRadioButton.fireEvent(actionEvent);
     }
 
+    /**
+     * On delete appointment.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onDeleteAppointment(ActionEvent actionEvent) throws SQLException {
         int deletedId;
         if (appointmentIdTextField.getText().length() > 0) {
@@ -253,6 +424,12 @@ public class appointmentsController implements Initializable {
 
     }
 
+    /**
+     * On add appointment.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onAddAppointment(ActionEvent actionEvent) throws IOException {
         Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addAppointment.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -261,6 +438,12 @@ public class appointmentsController implements Initializable {
         stage.show();
     }
 
+    /**
+     * On main menu.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onMainMenu(ActionEvent actionEvent) throws IOException {
         Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -269,6 +452,11 @@ public class appointmentsController implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

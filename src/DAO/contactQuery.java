@@ -10,7 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type Contact query.
+ */
 public class contactQuery {
+    /**
+     * Gets all contacts.
+     *
+     * @return the all contacts
+     * @throws SQLException the sql exception
+     */
     public static ObservableList<Contact> getAllContacts() throws SQLException {
         ObservableList<Contact> allContacts = FXCollections.observableArrayList();
         String sql = "SELECT *" +
@@ -27,6 +36,13 @@ public class contactQuery {
         return allContacts;
     }
 
+    /**
+     * Gets contact by id.
+     *
+     * @param contactId the contact id
+     * @return the contact by id
+     * @throws SQLException the sql exception
+     */
     public static Contact getContactById(int contactId) throws SQLException {
         String sql = "Select * FROM client_schedule.contacts WHERE Contact_ID=" + contactId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

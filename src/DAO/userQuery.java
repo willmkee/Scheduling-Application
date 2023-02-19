@@ -11,7 +11,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type User query.
+ */
 public abstract class userQuery {
+    /**
+     * Password verification int.
+     *
+     * @param userName the user name
+     * @param password the password
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int passwordVerification (String userName, String password) throws SQLException {
         try {
             String sql = "SELECT * FROM client_schedule.users\n" +
@@ -30,6 +41,12 @@ public abstract class userQuery {
         return -1;
     }
 
+    /**
+     * Gets all users.
+     *
+     * @return the all users
+     * @throws SQLException the sql exception
+     */
     public static ObservableList<User> getAllUsers() throws SQLException {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
         String sql = "SELECT users.User_ID, users.User_Name, users.Password\n" +
@@ -46,6 +63,13 @@ public abstract class userQuery {
         return allUsers;
     }
 
+    /**
+     * Gets user by id.
+     *
+     * @param userId the user id
+     * @return the user by id
+     * @throws SQLException the sql exception
+     */
     public static User getUserById(int userId) throws SQLException {
         String sql = "SELECT * FROM client_schedule.users WHERE users.User_ID=" + userId;
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

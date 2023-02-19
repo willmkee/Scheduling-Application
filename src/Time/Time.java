@@ -11,12 +11,30 @@ import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * The type Time.
+ */
 public class Time {
 
+    /**
+     * The constant currentTime.
+     */
     public static ZonedDateTime currentTime;
+    /**
+     * The constant fifteenMinutesPast.
+     */
     public static ZonedDateTime fifteenMinutesPast;
+    /**
+     * The constant zid.
+     */
     public static ZoneId zid;
 
+    /**
+     * View upcoming appointments observable list.
+     *
+     * @return the observable list
+     * @throws SQLException the sql exception
+     */
     public static ObservableList<Appointment> viewUpcomingAppointments() throws SQLException {
         ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
         ObservableList<Appointment> allAppointments = appointmentsQuery.getAllAppointments();
@@ -37,6 +55,13 @@ public class Time {
         return upcomingAppointments;
     }
 
+    /**
+     * Convert to utc string.
+     *
+     * @param ld the ld
+     * @param st the st
+     * @return the string
+     */
     public static String convertToUtc(LocalDate ld, LocalTime st) {
         LocalDateTime ldt = LocalDateTime.of(ld, st);
         ZonedDateTime systemTime = ldt.atZone(ZoneId.systemDefault());
@@ -46,6 +71,16 @@ public class Time {
         return utc;
     }
 
+    /**
+     * Appointment update overlap boolean.
+     *
+     * @param appointmentId the appointment id
+     * @param customerId    the customer id
+     * @param startDateTime the start date time
+     * @param endDateTime   the end date time
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean appointmentUpdateOverlap(int appointmentId, int customerId, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
         boolean overlap = false;
         ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();
@@ -64,6 +99,15 @@ public class Time {
         return overlap;
     }
 
+    /**
+     * Add appointment overlap boolean.
+     *
+     * @param customerId    the customer id
+     * @param startDateTime the start date time
+     * @param endDateTime   the end date time
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
     public static boolean addAppointmentOverlap(int customerId, LocalDateTime startDateTime, LocalDateTime endDateTime) throws SQLException {
         boolean overlap = false;
         ObservableList<Appointment> customerAppointments = FXCollections.observableArrayList();

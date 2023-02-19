@@ -29,16 +29,50 @@ import java.util.ResourceBundle;
 
 import static DAO.userQuery.passwordVerification;
 
+/**
+ * The type Login form controller.
+ */
 public class loginFormController implements Initializable {
+    /**
+     * The Login title.
+     */
     public Label loginTitle;
+    /**
+     * The Login username lable.
+     */
     public Label loginUsernameLable;
+    /**
+     * The Login username text field.
+     */
     public TextField loginUsernameTextField;
+    /**
+     * The Login password lable.
+     */
     public Label loginPasswordLable;
+    /**
+     * The Login password text field.
+     */
     public TextField loginPasswordTextField;
+    /**
+     * The Login location label.
+     */
     public Label loginLocationLabel;
+    /**
+     * The Login button.
+     */
     public Button loginButton;
+    /**
+     * The Login exit button.
+     */
     public Button loginExitButton;
 
+    /**
+     * On login.
+     *
+     * @param actionEvent the action event
+     * @throws IOException  the io exception
+     * @throws SQLException the sql exception
+     */
     public void onLogin(ActionEvent actionEvent) throws IOException, SQLException {
         String userName = loginUsernameTextField.getText();
         String password = loginPasswordTextField.getText();
@@ -89,11 +123,21 @@ public class loginFormController implements Initializable {
         logOutput.close();
     }
 
+    /**
+     * On exit.
+     *
+     * @param actionEvent the action event
+     */
     public void onExit(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.close();
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginLocationLabel.setText(String.valueOf(ZoneId.systemDefault()));

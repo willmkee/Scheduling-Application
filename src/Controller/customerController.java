@@ -27,35 +27,125 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The type Customer controller.
+ */
 public class customerController implements Initializable {
+    /**
+     * The Update customers label.
+     */
     public Label updateCustomersLabel;
+    /**
+     * The Customers table view.
+     */
     public TableView<Customer> customersTableView;
+    /**
+     * The Customer id table col.
+     */
     public TableColumn<Object, Object> customerIdTableCol;
+    /**
+     * The Customer name table col.
+     */
     public TableColumn<Object, Object> customerNameTableCol;
+    /**
+     * The Customer address table col.
+     */
     public TableColumn customerAddressTableCol;
+    /**
+     * The Customer postal code table col.
+     */
     public TableColumn customerPostalCodeTableCol;
+    /**
+     * The Customer phone table col.
+     */
     public TableColumn customerPhoneTableCol;
+    /**
+     * The Customer first level data table col.
+     */
     public TableColumn customerFirstLevelDataTableCol;
+    /**
+     * The Customer id label.
+     */
     public Label customerIdLabel;
+    /**
+     * The Customer id text field.
+     */
     public TextField customerIdTextField;
+    /**
+     * The Customer name label.
+     */
     public Label customerNameLabel;
+    /**
+     * The Customer name text field.
+     */
     public TextField customerNameTextField;
+    /**
+     * The Address label.
+     */
     public Label addressLabel;
+    /**
+     * The Address text field.
+     */
     public TextField addressTextField;
+    /**
+     * The Postal code label.
+     */
     public Label postalCodeLabel;
+    /**
+     * The Postal code text field.
+     */
     public TextField postalCodeTextField;
+    /**
+     * The Phone number label.
+     */
     public Label phoneNumberLabel;
+    /**
+     * The Phone number text field.
+     */
     public TextField phoneNumberTextField;
+    /**
+     * The Country label.
+     */
     public Label countryLabel;
+    /**
+     * The Country combo box.
+     */
     public ComboBox<Country> countryComboBox;
+    /**
+     * The State province label.
+     */
     public Label stateProvinceLabel;
+    /**
+     * The State province combo box.
+     */
     public ComboBox<FirstLevelDivision> stateProvinceComboBox;
+    /**
+     * The Save changes button.
+     */
     public Button saveChangesButton;
+    /**
+     * The Add new customer button.
+     */
     public Button addNewCustomerButton;
+    /**
+     * The Delete customer button.
+     */
     public Button deleteCustomerButton;
+    /**
+     * The Back button.
+     */
     public Button backButton;
+    /**
+     * The Country table col.
+     */
     public TableColumn countryTableCol;
 
+    /**
+     * On save changes.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onSaveChanges(ActionEvent actionEvent) throws SQLException {
         if((customerNameTextField.getText().length() > 0) && (addressTextField.getText().length() > 0) && (postalCodeTextField.getText().length() > 0) && (phoneNumberTextField.getText().length() > 0) && (countryComboBox.getValue() != null) && (stateProvinceComboBox != null)) {
             String customerName = customerNameTextField.getText();
@@ -94,6 +184,12 @@ public class customerController implements Initializable {
         }
     }
 
+    /**
+     * On add new customer.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onAddNewCustomer(ActionEvent actionEvent) throws IOException {
         Parent addCustomer = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/addCustomer.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -102,6 +198,12 @@ public class customerController implements Initializable {
         stage.show();
     }
 
+    /**
+     * On delete customer.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     */
     public void onDeleteCustomer(ActionEvent actionEvent) throws SQLException {
         int deletedId;
         if (customerIdTextField.getText().length() > 0) {
@@ -143,6 +245,12 @@ public class customerController implements Initializable {
         }
     }
 
+    /**
+     * On back.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onBack(ActionEvent actionEvent) throws IOException {
         Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -151,6 +259,11 @@ public class customerController implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

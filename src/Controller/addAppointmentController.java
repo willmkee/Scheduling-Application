@@ -26,35 +26,126 @@ import java.time.*;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * The type Add appointment controller.
+ */
 public class addAppointmentController implements Initializable {
+    /**
+     * The Add appointment label.
+     */
     public Label addAppointmentLabel;
+    /**
+     * The Add appointment id label.
+     */
     public Label addAppointmentIdLabel;
+    /**
+     * The Add appointment id text field.
+     */
     public TextField addAppointmentIdTextField;
+    /**
+     * The Add appointment title label.
+     */
     public Label addAppointmentTitleLabel;
+    /**
+     * The Add appointment title text field.
+     */
     public TextField addAppointmentTitleTextField;
+    /**
+     * The Add appointment description label.
+     */
     public Label addAppointmentDescriptionLabel;
+    /**
+     * The Add appointment description text field.
+     */
     public TextField addAppointmentDescriptionTextField;
+    /**
+     * The Add appointment location label.
+     */
     public Label addAppointmentLocationLabel;
+    /**
+     * The Add appointment location text field.
+     */
     public TextField addAppointmentLocationTextField;
+    /**
+     * The Add contact label.
+     */
     public Label addContactLabel;
+    /**
+     * The Add contact combo box.
+     */
     public ComboBox<Contact> addContactComboBox;
+    /**
+     * The Add appointment customer id label.
+     */
     public Label addAppointmentCustomerIdLabel;
+    /**
+     * The Add appointment type label.
+     */
     public Label addAppointmentTypeLabel;
+    /**
+     * The Add appointment type text field.
+     */
     public TextField addAppointmentTypeTextField;
+    /**
+     * The Add appointment start date label.
+     */
     public Label addAppointmentStartDateLabel;
+    /**
+     * The Add appointment start date date picker.
+     */
     public DatePicker addAppointmentStartDateDatePicker;
+    /**
+     * The Add appointment end date label.
+     */
     public Label addAppointmentEndDateLabel;
+    /**
+     * The Add appointment end date date picker.
+     */
     public DatePicker addAppointmentEndDateDatePicker;
+    /**
+     * The Add appointment end time label.
+     */
     public Label addAppointmentEndTimeLabel;
+    /**
+     * The Add appointment end time combo box.
+     */
     public ComboBox<LocalTime> addAppointmentEndTimeComboBox;
+    /**
+     * The Add appointment user id label.
+     */
     public Label addAppointmentUserIdLabel;
+    /**
+     * The Save appointment button.
+     */
     public Button saveAppointmentButton;
+    /**
+     * The Cancel button.
+     */
     public Button cancelButton;
+    /**
+     * The Add appointment start time label.
+     */
     public Label addAppointmentStartTimeLabel;
+    /**
+     * The Add appointment start time combo box.
+     */
     public ComboBox<LocalTime> addAppointmentStartTimeComboBox;
+    /**
+     * The Customer id combo box.
+     */
     public ComboBox<String> customerIdComboBox;
+    /**
+     * The User id combo box.
+     */
     public ComboBox<User> userIdComboBox;
 
+    /**
+     * On save appointment.
+     *
+     * @param actionEvent the action event
+     * @throws SQLException the sql exception
+     * @throws IOException  the io exception
+     */
     public void onSaveAppointment(ActionEvent actionEvent) throws SQLException, IOException {
         if (addAppointmentTitleTextField.getText().length() > 0 && addAppointmentDescriptionTextField.getText().length() >0 && addAppointmentLocationTextField.getText().length() > 0 && addContactComboBox.getValue() != null && customerIdComboBox.getValue() != null && addAppointmentTypeTextField.getText().length() > 0 && addAppointmentEndDateDatePicker.getValue() != null && addAppointmentEndTimeComboBox.getValue() != null && addAppointmentStartDateDatePicker != null && addAppointmentStartTimeComboBox.getValue() != null && userIdComboBox.getValue() != null) {
             LocalDate startDate = addAppointmentStartDateDatePicker.getValue();
@@ -122,6 +213,12 @@ public class addAppointmentController implements Initializable {
         }
     }
 
+    /**
+     * On cancel.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     public void onCancel(ActionEvent actionEvent) throws IOException {
         Parent directory = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/View/directory.fxml")));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -130,6 +227,11 @@ public class addAppointmentController implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LocalDateTime startEastern = LocalDateTime.of(LocalDate.now(), LocalTime.of(8, 0));

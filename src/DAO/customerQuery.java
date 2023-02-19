@@ -9,8 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type Customer query.
+ */
 public class customerQuery {
 
+    /**
+     * Gets all customers.
+     *
+     * @return the all customers
+     * @throws SQLException the sql exception
+     */
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         String sql = "SELECT customers.Customer_ID,\n" +
@@ -41,6 +50,13 @@ public class customerQuery {
     return allCustomers;
 }
 
+    /**
+     * Gets customer by id.
+     *
+     * @param customerId the customer id
+     * @return the customer by id
+     * @throws SQLException the sql exception
+     */
     public static Customer getCustomerById(int customerId) throws SQLException {
         String sql = "SELECT customers.Customer_ID,\n" +
                 "    customers.Customer_Name,\n" +
@@ -68,6 +84,13 @@ public class customerQuery {
         return new Customer(customerId, customerName, address, postalCode, phoneNumber, divisionId, stateProvince, country);
     }
 
+    /**
+     * Delete customer by id int.
+     *
+     * @param deletedId the deleted id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int deleteCustomerById(int deletedId) throws SQLException {
         String sql = "DELETE FROM client_schedule.customers WHERE customers.Customer_ID=" + deletedId + ";";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -75,6 +98,17 @@ public class customerQuery {
         return result;
     }
 
+    /**
+     * Add new customer int.
+     *
+     * @param customerName the customer name
+     * @param address      the address
+     * @param postalCode   the postal code
+     * @param phone        the phone
+     * @param divisionId   the division id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int addNewCustomer(String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
         String sql = "INSERT INTO client_schedule.customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID)\n" +
                 "VALUES('" + customerName + "', '" + address + "', '" + postalCode + "', '" + phone + "', NOW(), 'script', NOW(), 'script', " + divisionId + ");";
@@ -83,6 +117,18 @@ public class customerQuery {
         return results;
     }
 
+    /**
+     * Update customer int.
+     *
+     * @param customerId   the customer id
+     * @param customerName the customer name
+     * @param address      the address
+     * @param postalCode   the postal code
+     * @param phone        the phone
+     * @param divisionId   the division id
+     * @return the int
+     * @throws SQLException the sql exception
+     */
     public static int updateCustomer(int customerId, String customerName, String address, String postalCode, String phone, int divisionId) throws SQLException {
         String sql = "UPDATE client_schedule.customers\n" +
                 "SET Customer_Name = \"" + customerName + "\", Address = \"" + address + "\", Postal_Code = \"" + postalCode + "\", Phone = \"" + phone + "\", Division_ID = " + divisionId + ", Last_Update = NOW(), Last_Updated_By = 'script' \n" +
