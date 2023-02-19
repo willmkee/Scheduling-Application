@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * The type Country access.
+ * The Country access.
  */
 public class countryAccess {
     /**
      * Gets all countries.
      *
-     * @return the all countries
-     * @throws SQLException the sql exception
+     * @return All countries
+     * @throws SQLException
      */
     public static ObservableList<Country> getAllCountries() throws SQLException {
         ObservableList<Country> allCountries = FXCollections.observableArrayList();
@@ -39,7 +39,7 @@ public class countryAccess {
      *
      * @param countryName the country name
      * @return the country by name
-     * @throws SQLException the sql exception
+     * @throws SQLException
      */
     public static Country getCountryByName(String countryName) throws SQLException {
         String sql = "SELECT * FROM client_schedule.countries WHERE Country=\"" + countryName + "\";";

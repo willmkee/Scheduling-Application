@@ -10,15 +10,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * The type Customer query.
+ * The Customer query.
  */
 public class customerQuery {
 
     /**
      * Gets all customers.
      *
-     * @return the all customers
-     * @throws SQLException the sql exception
+     * @return All customers
+     * @throws SQLException
      */
     public static ObservableList<Customer> getAllCustomers() throws SQLException {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
@@ -55,7 +55,7 @@ public class customerQuery {
      *
      * @param customerId the customer id
      * @return the customer by id
-     * @throws SQLException the sql exception
+     * @throws SQLException
      */
     public static Customer getCustomerById(int customerId) throws SQLException {
         String sql = "SELECT customers.Customer_ID,\n" +
@@ -89,7 +89,7 @@ public class customerQuery {
      *
      * @param deletedId the deleted id
      * @return the int
-     * @throws SQLException the sql exception
+     * @throws SQLException
      */
     public static int deleteCustomerById(int deletedId) throws SQLException {
         String sql = "DELETE FROM client_schedule.customers WHERE customers.Customer_ID=" + deletedId + ";";

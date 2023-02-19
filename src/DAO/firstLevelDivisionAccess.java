@@ -10,14 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * The type First level division access.
+ * The First level division access.
  */
 public class firstLevelDivisionAccess {
     /**
      * Gets all states.
      *
-     * @return the all states
-     * @throws SQLException the sql exception
+     * @return All states
+     * @throws SQLException
      */
     public static ObservableList<FirstLevelDivision> getAllStates() throws SQLException {
         ObservableList<FirstLevelDivision> allStates = FXCollections.observableArrayList();
@@ -39,8 +39,8 @@ public class firstLevelDivisionAccess {
     /**
      * Gets all uk countries.
      *
-     * @return the all uk countries
-     * @throws SQLException the sql exception
+     * @return All uk countries
+     * @throws SQLException
      */
     public static ObservableList<FirstLevelDivision> getAllUKCountries() throws SQLException {
         ObservableList<FirstLevelDivision> allCountries = FXCollections.observableArrayList();
@@ -62,8 +62,8 @@ public class firstLevelDivisionAccess {
     /**
      * Gets all canadian provinces.
      *
-     * @return the all canadian provinces
-     * @throws SQLException the sql exception
+     * @return All canadian provinces
+     * @throws SQLException
      */
     public static ObservableList<FirstLevelDivision> getAllCanadianProvinces() throws SQLException {
         ObservableList<FirstLevelDivision> allProvinces = FXCollections.observableArrayList();
@@ -83,11 +83,11 @@ public class firstLevelDivisionAccess {
     }
 
     /**
-     * Gets states provincesby country name.
+     * Gets states provinces by country name.
      *
      * @param countryName the country name
-     * @return the states provincesby country name
-     * @throws SQLException the sql exception
+     * @return the states/provinces by country name
+     * @throws SQLException
      */
     public static ObservableList<FirstLevelDivision> getStatesProvincesbyCountryName(String countryName) throws SQLException {
         ObservableList<FirstLevelDivision> allProvinces = FXCollections.observableArrayList();
@@ -125,11 +125,11 @@ public class firstLevelDivisionAccess {
     }
 
     /**
-     * Gets state provinces by name.
+     * Gets state/provinces by name.
      *
      * @param stateProvince the state province
-     * @return the state provinces by name
-     * @throws SQLException the sql exception
+     * @return the state/province by name
+     * @throws SQLException
      */
     public static FirstLevelDivision getStateProvincesByName(String stateProvince) throws SQLException {
         String sql = "SELECT Division_ID, Division, Country_ID FROM client_schedule.first_level_divisions WHERE Division=\"" + stateProvince +"\";";

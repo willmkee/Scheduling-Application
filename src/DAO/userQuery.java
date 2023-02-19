@@ -20,8 +20,8 @@ public abstract class userQuery {
      *
      * @param userName the user name
      * @param password the password
-     * @return the int
-     * @throws SQLException the sql exception
+     * @return UserId
+     * @throws SQLException
      */
     public static int passwordVerification (String userName, String password) throws SQLException {
         try {
@@ -44,8 +44,8 @@ public abstract class userQuery {
     /**
      * Gets all users.
      *
-     * @return the all users
-     * @throws SQLException the sql exception
+     * @return All users
+     * @throws SQLException
      */
     public static ObservableList<User> getAllUsers() throws SQLException {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
@@ -68,7 +68,7 @@ public abstract class userQuery {
      *
      * @param userId the user id
      * @return the user by id
-     * @throws SQLException the sql exception
+     * @throws SQLException
      */
     public static User getUserById(int userId) throws SQLException {
         String sql = "SELECT * FROM client_schedule.users WHERE users.User_ID=" + userId;

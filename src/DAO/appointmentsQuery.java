@@ -14,13 +14,13 @@ import java.sql.*;
 import java.time.*;
 
 /**
- * The type Appointments query.
+ * The Appointments query.
  */
 public class appointmentsQuery {
     /**
      * Gets all appointments.
      *
-     * @return the all appointments
+     * @return All appointments
      * @throws SQLException the sql exception
      */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException {
@@ -52,8 +52,8 @@ public class appointmentsQuery {
     /**
      * Delete appointment by id int.
      *
-     * @param deletedId the deleted id
-     * @return the int
+     * @param deletedId the id to be deleted
+     * @return the number of rows affected
      * @throws SQLException the sql exception
      */
     public static int deleteAppointmentById(int deletedId) throws SQLException {
@@ -67,7 +67,7 @@ public class appointmentsQuery {
      * Delete appointments by customer id int.
      *
      * @param customerId the customer id
-     * @return the int
+     * @return the number of rows affected
      * @throws SQLException the sql exception
      */
     public static int deleteAppointmentsByCustomerId(int customerId) throws SQLException {
