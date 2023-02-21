@@ -397,10 +397,11 @@ public class appointmentsController implements Initializable {
             if (result.get() == ButtonType.OK){
                 if (appointmentIdTextField.getText() != null) {
                     if(appointmentsQuery.deleteAppointmentById(deletedId) > 0){
+                        String appType = typeTextField.getText();
                         Alert deleteSuccessfulAlert = new Alert(Alert.AlertType.ERROR);
                         deleteSuccessfulAlert.setTitle("Appointment Deleted");
                         deleteSuccessfulAlert.setHeaderText("Success!");
-                        deleteSuccessfulAlert.setContentText("Selected Appointment Successfully Deleted");
+                        deleteSuccessfulAlert.setContentText("Appointment ID: " + deletedId + "\nAppointment Type: " + appType + "\nSuccessfully Deleted");
 
                         deleteSuccessfulAlert.showAndWait();
 
