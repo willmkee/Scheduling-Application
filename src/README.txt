@@ -1,12 +1,10 @@
- WGU C195 Scheduling Application
+ Scheduling Application
  This application allows a user to log in and manage customers and appointments.
  User may update, add, and delete customers and appointments.
  User may view reports.
 
 Author: William Kee
 Application Version: 2.0
-Email: wkee@wgu.edu
-Date: 2/19/2023
 
 IDE Version: IntelliJ CE 2021.1.3 x64
 JDK Version: Java SE 17.0.1
